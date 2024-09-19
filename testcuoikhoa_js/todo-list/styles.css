@@ -1,0 +1,56 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+.tabs{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.tabs button{
+    padding: 10px 20px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+.tabs button.active {
+    border-bottom: 2px solid red;
+}
+#new-task{
+    width: calc(100% -100px);
+    padding: 10px;
+    margin-bottom: 10px;
+   
+    border-radius: 5px;
+}
+#add-task{
+    padding: 10px;
+    border: none;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+#task-list li{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+.hidden {
+    display: none;
+}
+.completed {
+    text-decoration: line-through;
+}
+#delete-all {
+    padding: 10px 20px;
+    border: none;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+}
