@@ -1,0 +1,58 @@
+.page-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: #1877f2;
+  margin-bottom: 30px;
+}
+
+.register-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f2f5;
+  flex-direction: column;
+}
+
+.ant-form {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ant-form-item {
+  margin-bottom: 20px;
+}
+
+.ant-form-item-label {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.ant-input, .ant-select-selector, .ant-picker-input, .ant-input-number {
+  font-size: 17px; /* Tăng kích thước chữ trong input */
+  padding: 10px; /* Tăng padding để ô input to hơn */
+  height: 45px; /* Tăng chiều cao của ô input */
+  border-radius: 7px; /* Để các ô input có góc bo tròn đẹp */
+}
+
+.ant-btn {
+  width: 100%;
+  border-radius: 7px;
+  font-weight: bold;
+  padding: 12px;
+  font-size: 18px; /* Tăng font size của nút bấm */
+  height: 45px; /* Tăng chiều cao của nút bấm */
+}
+
+.title{
+  padding: 12px;
+}
+.link{
+  display: flex;
+  justify-content: center;
+  font-size: 15px;
+}

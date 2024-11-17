@@ -1,0 +1,10 @@
+.container-nav{
+    display: flex;
+    justify-content: space-between;
+    background-color: gray;
+    border: 2px solid black;
+}
+.right-top-nav{
+    display: flex;
+   
+}

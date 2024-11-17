@@ -1,0 +1,80 @@
+
+/* CSS cho trang đăng nhập giống Facebook */
+.login-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f2f5; /* Màu nền nhạt */
+  flex-direction: column;
+}
+
+.ant-form {
+  width: 100%;
+  max-width: 400px; /* Giới hạn chiều rộng của form */
+  background: white; /* Màu nền trắng cho form */
+  padding: 30px; /* Khoảng cách bên trong form */
+  border-radius: 10px; /* Bo tròn các góc form */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng đổ bóng */
+  text-align: center; /* Căn giữa các thành phần trong form */
+}
+
+.ant-form-item {
+  margin-bottom: 20px;
+}
+
+.ant-form-item-label {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left; /* Căn lề trái cho nhãn */
+}
+
+.ant-input, .ant-input-password {
+  font-size: 16px; /* Tăng kích thước chữ trong input */
+  padding: 10px; /* Tăng padding để ô input to hơn */
+  height: 50px; /* Tăng chiều cao của ô input */
+  border-radius: 8px; /* Bo tròn các góc của ô input */
+}
+
+.ant-btn-primary {
+  width: 100%; /* Nút bấm chiếm toàn bộ chiều ngang */
+  border-radius: 8px; /* Bo tròn nút bấm */
+  font-weight: bold;
+  padding: 12px;
+  font-size: 18px; /* Tăng kích thước chữ trong nút bấm */
+  height: 50px; /* Tăng chiều cao của nút bấm */
+  background-color: #1877f2; /* Màu xanh đặc trưng của Facebook */
+  border: none;
+}
+
+.ant-btn-primary:hover {
+  background-color: #166fe5; /* Màu xanh đậm hơn khi hover */
+}
+
+.extra-links {
+  margin-top: 20px;
+}
+
+.extra-links a {
+  color: #1877f2;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.extra-links a:hover {
+  text-decoration: underline; /* Gạch chân khi hover */
+}
+/* CSS cho tiêu đề "YourPage" */
+.logo-title {
+  font-size: 36px; /* Kích thước chữ lớn hơn */
+  font-weight: bold; /* Đậm chữ */
+  color: #1877f2; /* Màu xanh giống Facebook */
+  margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
+  text-align: center; /* Căn giữa tiêu đề */
+  margin-top: 200px;
+}
+.register{
+  color: #166fe5;
+  font-size: 18px;
+ 
+}
