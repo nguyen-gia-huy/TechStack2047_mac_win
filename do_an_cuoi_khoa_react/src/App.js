@@ -7,9 +7,10 @@ import {
 } from "react-router-dom";
 import Register from "./FirstPage/Register";
 import Login from "./FirstPage/Login";
-import DefaultPage from "./components/DefaultPage";
+
 import Profile from "./components/Profile/Profile";
 import { ProfileProvider } from "./ProfileContext";
+import DefaultPage from "./components/DefaultLayout/DefaultPage";
 
 // Component bảo vệ để kiểm tra trạng thái đăng nhập
 const ProtectedRoute = ({ children }) => {

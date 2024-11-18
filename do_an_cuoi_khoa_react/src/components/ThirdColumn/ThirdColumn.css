@@ -1,0 +1,18 @@
+.container-third-colum{
+  
+   
+        border:2px solid black ; 
+        display: flex;
+        justify-content: flex-end;
+        height: 100vh;
+        flex: 1;
+        min-width: 200px;
+        max-width: 300px;
+        background-color: #f4f4f4;
+        padding: 10px;
+}
+@media (max-width: 768px)  {
+        .container-third-colum{
+                display: none;
+        }
+}

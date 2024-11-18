@@ -1,8 +1,10 @@
 .container-nav{
+    width: 100vw;
     display: flex;
     justify-content: space-between;
     background-color: gray;
     border: 2px solid black;
+    margin-bottom: 10px;
 }
 .right-top-nav{
     display: flex;

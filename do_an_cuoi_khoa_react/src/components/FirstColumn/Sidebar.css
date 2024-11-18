@@ -1,6 +1,13 @@
 .sidebar{
     display: flex;
     flex-direction: column;
-    padding:10px ;
-    
+    flex: 1; 
+    min-width: 200px; /* Đảm bảo độ rộng tối thiểu */
+  max-width: 300px; /* Đảm bảo độ rộng tối đa */
+  background-color: #f4f4f4;
+ 
+}@media (max-width: 768px)  {
+  .sidebar{
+          display: none;
+  }
 }

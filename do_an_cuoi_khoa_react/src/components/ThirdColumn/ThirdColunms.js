@@ -1,14 +1,9 @@
 import React from "react";
-
+import './ThirdColumn.css'
 const ThirdColunms = () => {
   return (
     <div
-      style={{
-        width: "300px",
-        border: "2px solid black",
-        display: "flex",
-        height: "100vh",
-      }}
+      className="container-third-colum"
     >
       <h1>cot thu 3</h1>
     </div>
