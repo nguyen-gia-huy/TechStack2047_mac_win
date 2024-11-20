@@ -4,12 +4,13 @@ import Navigation from "../Navigation/Navigation";
 import UpImgModal from "./UploadImage/UpImgModal";
 import { ProfileContext } from "../../ProfileContext";
 import UploadBlog from "./UploadBlog/UploadBlog";
+import { Button, message } from "antd";
+
 const Profile = () => {
   const { profileData, setProfileData } = useContext(ProfileContext);
 
   useEffect(() => {
     const userId = localStorage.getItem("loggedInUserId");
-   
 
     const fetchProfileData = async () => {
       try {
@@ -23,6 +24,38 @@ const Profile = () => {
 
     fetchProfileData();
   }, [setProfileData]);
+
+  // Hàm xóa bài viết
+  const handleDeletePost = async (postId) => {
+    const userId = localStorage.getItem("loggedInUserId");
+
+    try {
+      // Fetch dữ liệu hiện tại của user
+      const response = await fetch(`http://localhost:3000/users/${userId}`);
+      const userData = await response.json();
+
+      // Lọc bỏ bài viết bị xóa
+      const updatedPosts = userData.posts.filter((post) => post.id !== postId);
+      const updatedUserData = { ...userData, posts: updatedPosts };
+
+      // Gửi cập nhật lên API
+      await fetch(`http://localhost:3000/users/${userId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedUserData),
+      });
+
+      // Cập nhật lại state
+      setProfileData(updatedUserData);
+
+      message.success("Post deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      message.error("Failed to delete post!");
+    }
+  };
 
   if (!profileData) {
     return <div>Loading...</div>;
@@ -74,6 +107,14 @@ const Profile = () => {
               <p>{post.content}</p>
               {post.image && <img src={post.image} alt="Post" />}
               <span>{new Date(post.createdAt).toLocaleString()}</span>
+              <Button
+                type="primary"
+                danger
+                onClick={() => handleDeletePost(post.id)}
+                style={{ marginTop: "10px" }}
+              >
+                Delete
+              </Button>
             </div>
           ))
         ) : (
