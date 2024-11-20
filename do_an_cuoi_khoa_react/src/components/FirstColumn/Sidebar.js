@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Sidebar.css";
+
 const Sidebar = () => {
   return (
     <div
@@ -18,6 +19,7 @@ const Sidebar = () => {
         <a className="nav-link" href="#">
           Add new blog
         </a>
+       
       </nav>
     </div>
   );

@@ -3,16 +3,13 @@ import "./Profile.css";
 import Navigation from "../Navigation/Navigation";
 import UpImgModal from "./UploadImage/UpImgModal";
 import { ProfileContext } from "../../ProfileContext";
+import UploadBlog from "./UploadBlog/UploadBlog";
 const Profile = () => {
   const { profileData, setProfileData } = useContext(ProfileContext);
 
   useEffect(() => {
     const userId = localStorage.getItem("loggedInUserId");
-    if (!userId) {
-      alert("Bạn chưa đăng nhập!");
-      window.location.href = "/";
-      return;
-    }
+   
 
     const fetchProfileData = async () => {
       try {
@@ -69,6 +66,19 @@ const Profile = () => {
           </div>
         </div>
         <UpImgModal />
+        <UploadBlog />
+        <h2>Posts</h2>
+        {profileData.posts && profileData.posts.length > 0 ? (
+          profileData.posts.map((post) => (
+            <div key={post.id} className="post">
+              <p>{post.content}</p>
+              {post.image && <img src={post.image} alt="Post" />}
+              <span>{new Date(post.createdAt).toLocaleString()}</span>
+            </div>
+          ))
+        ) : (
+          <p>No posts yet!</p>
+        )}
       </div>
     </>
   );
