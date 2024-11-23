@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Input, Button, notification } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
+import { Color } from "antd/es/color-picker";
 const Login = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -42,8 +43,9 @@ const Login = () => {
   };
 
   return (
-    <>
-      <h1 className="logo-title">YourPage</h1>
+
+     <div className="login-form" >
+     <h1 className="logo-title">YourPage</h1>
       <Form
         onFinish={handleSubmit}
         layout="vertical"
@@ -88,7 +90,8 @@ const Login = () => {
           </Link>
         </Form.Item>
       </Form>
-    </>
+     </div>
+
   );
 };
 

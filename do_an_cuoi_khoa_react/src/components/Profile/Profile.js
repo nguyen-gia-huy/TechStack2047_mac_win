@@ -72,9 +72,9 @@ const Profile = () => {
   if (isError) return <div>Error: {error.message}</div>;
 
   return (
-    <>
+    <div className="container" >
       <Navigation />
-      <div className="profile">
+      <div className="profile" >
         <div className="cover-photo">
           <img
             src={profileData.coverPhoto || "default-cover-photo-url"}
@@ -89,7 +89,7 @@ const Profile = () => {
           />
           <h1>{profileData.nickname}</h1>
         </div>
-
+    <hr/>
         <div className="profile-info">
           <div className="info-section">
             <h2>About</h2>
@@ -111,7 +111,8 @@ const Profile = () => {
         <div ><UpImgModal />
           <UploadBlog /></div>
         <h2>Posts</h2>
-        <div>
+        <hr/>
+        <div className="post-container" >
           {profileData.posts && profileData.posts.length > 0 ? (
             profileData.posts.map((post) => (
               <div key={post.id} className="post" style={{ marginTop: "10px" }}>
@@ -146,7 +147,7 @@ const Profile = () => {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

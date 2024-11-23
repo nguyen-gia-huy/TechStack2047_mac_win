@@ -1,11 +1,12 @@
 
 /* CSS cho trang đăng nhập giống Facebook */
 .login-form {
+  padding-bottom: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f0f2f5; /* Màu nền nhạt */
+  background-color: #F0F2F5; /* Màu nền nhạt */
   flex-direction: column;
 }
 
