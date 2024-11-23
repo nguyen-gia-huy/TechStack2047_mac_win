@@ -10,7 +10,7 @@ const DefaultPage = () => {
     <> <header style={{ position: 'fixed' }}><Navigation style={{ with: '100vw' }}></Navigation> </header>
       <>
 
-        <div className="defaultContainer" style={{ display: 'flex', flexWrap: 'nowrap', justifyContent: 'center', backgroundColor: '#f0f2f5' }}>
+        <div className="defaultContainer" style={{ display: 'flex', flexWrap: 'nowrap', justifyContent: 'center'}}>
           <div className="sidebar" >
             <Sidebar />
           </div>
