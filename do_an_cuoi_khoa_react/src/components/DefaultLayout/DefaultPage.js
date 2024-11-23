@@ -4,23 +4,25 @@ import { Route, Router, Routes } from "react-router-dom";
 import Sidebar from "../FirstColumn/Sidebar";
 import Post from "../SecondColumn/Post";
 import ThirdColunms from "../ThirdColumn/ThirdColunms";
-import './DefaultPage'
+import './DefaultPage.css'
 const DefaultPage = () => {
   return (
-    <>
-      <Navigation style={{with:'100vw'}}></Navigation>
-      <div  style={{ display: "flex", flexWrap:'wrap', padding:"30px", width:"100vw",justifyContent: "space-between"}}>
-        <div className="sidebar" >
-          <Sidebar></Sidebar>
-        </div>
-        <div className="post">
-          <Post />
-        </div>
-        <div className="third-column">
-          <ThirdColunms />
-        </div>
-      </div>
-    </>
+  <> <header style={{ position:'fixed'}}><Navigation style={{with:'100vw'}}></Navigation> </header> 
+  <>
+ 
+  <div className="defaultContainer" style={{  display:'flex', flexWrap:'nowrap', justifyContent:'center'}}>
+  <div className="sidebar" >
+    <Sidebar />
+  </div>
+  <div className="post-default">
+    <Post />
+  </div>
+  <div className="third-column" >
+    <ThirdColunms />
+  </div>
+</div>
+
+</></>
   );
 };
 

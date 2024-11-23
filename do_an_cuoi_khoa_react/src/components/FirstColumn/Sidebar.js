@@ -4,14 +4,10 @@ import "./Sidebar.css";
 
 const Sidebar = () => {
   return (
-    <div
-      style={{
-        border: "2px solid black",
-        width: "300px",
-        height: "100vh",
-      }}
+    <div className="first-colum"
+     
     >
-      <nav className="sidebar">
+      <nav>
         <Link to={"/profile"}>Profile</Link>
         <a className="nav-link" href="#">
           your frend

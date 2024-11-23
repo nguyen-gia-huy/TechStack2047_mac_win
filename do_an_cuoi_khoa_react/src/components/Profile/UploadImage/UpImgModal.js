@@ -50,7 +50,7 @@ const UpImgModal = () => {
 
   return (
     <>
-      <Button className="modal-btn" type="primary" onClick={showModal}>
+      <Button style={{width:'300px', marginRight:'10px'}} className="modal-btn" type="primary" onClick={showModal}>
         Upload Picture
       </Button>
       <Modal

@@ -1,12 +1,16 @@
 .container-nav{
-    width: 100vw;
-    display: flex;
-    justify-content: space-between;
-    background-color: gray;
-    border: 2px solid black;
-    margin-bottom: 10px;
-}
-.right-top-nav{
-    display: flex;
-   
-}
+        border: 2px solid #bbc1c7;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px; /* Chiều cao header */
+        background-color: #0b78e4; /* Màu tối */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px; /* Khoảng cách hai bên */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng đổ */
+        z-index: 1000; /* Đặt lên trên các thành phần khác */
+      }
+      

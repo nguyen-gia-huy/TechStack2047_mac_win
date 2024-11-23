@@ -20,20 +20,18 @@ const Navigation = () => {
   };
 
   return (
-    <div className="container-nav">
-      <div className="right-top-nav">
+    <div className="container-nav" >
+      <div className="right-top-nav" style={{justifyContent:'flex-start', display:'flex' }}>
         <h1>Your page</h1>
-      </div>
-      <div className="center-top-nav">
-        {/* Bao bọc FontAwesomeIcon bằng Link để hỗ trợ điều hướng */}
         <Link to="/defaultPage">
           <FontAwesomeIcon
-            style={{ marginTop: 5, fontSize: 40 }}
+            style={{ marginLeft:15 ,marginTop: 5, fontSize: 40 }}
             icon={faHouse}
           />
         </Link>
       </div>
-      <div className="left-top-nav">
+    
+      <div className="left-top-nav"  >
         <button onClick={handleLogout}>Logout</button>
         {/* Thay thế thẻ span bằng thẻ img */}
         {/* <img

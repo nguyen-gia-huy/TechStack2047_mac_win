@@ -82,7 +82,7 @@ const UploadBlog = ({ onImageUpload }) => {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      <Button style={{width:'300px'}} type="primary" onClick={showModal}>
         Add new blog
       </Button>
     
