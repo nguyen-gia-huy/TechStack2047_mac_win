@@ -89,7 +89,7 @@ const Profile = () => {
           />
           <h1>{profileData.nickname}</h1>
         </div>
-    <hr/>
+        <hr />
         <div className="profile-info">
           <div className="info-section">
             <h2>About</h2>
@@ -111,37 +111,40 @@ const Profile = () => {
         <div ><UpImgModal />
           <UploadBlog /></div>
         <h2>Posts</h2>
-        <hr/>
+        <hr />
         <div className="post-container" >
           {profileData.posts && profileData.posts.length > 0 ? (
-            profileData.posts.map((post) => (
-              <div key={post.id} className="post" style={{ marginTop: "10px" }}>
-                <div style={{ display: "flex" }}>
-                  <img
-                    className="post-avatar"
-                    src={profileData.avatar || "default-avatar-url"}
-                    alt=""
-                  />
-                  <p>
-                    <h4>{profileData.nickname}</h4>
-                    <span>{new Date(post.createdAt).toLocaleString()}</span>
-                  </p>
+            [...profileData.posts]
+              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+              .map((post) => (
+                <div key={post.id} className="post" style={{ marginTop: "10px" }}>
+                  <div style={{ display: "flex" }}>
+                    <img
+                      className="post-avatar"
+                      src={profileData.avatar || "default-avatar-url"}
+                      alt=""
+                    />
+                    <p>
+                      <h4>{profileData.nickname}</h4>
+                      <span>{new Date(post.createdAt).toLocaleString()}</span>
+                    </p>
+                  </div>
+                  <p>{post.content}</p>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    {post.image && <img src={post.image} alt="Post" />}
+                  </div>
+                  <hr />
+
+                  <Button
+                    type="primary"
+                    danger
+                    onClick={() => handleDeletePost(post.id)}
+                    style={{ marginTop: "10px" }}
+                  >
+                    Delete
+                  </Button>
                 </div>
-                <p>{post.content}</p>
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  {post.image && <img src={post.image} alt="Post" />}
-                </div>
-                <hr />
-                <Button
-                  type="primary"
-                  danger
-                  onClick={() => handleDeletePost(post.id)}
-                  style={{ marginTop: "10px" }}
-                >
-                  Delete
-                </Button>
-              </div>
-            ))
+              ))
           ) : (
             <p>No posts yet!</p>
           )}
