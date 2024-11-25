@@ -6,6 +6,7 @@ import UpImgModal from "./UploadImage/UpImgModal";
 import { ProfileContext } from "../../ProfileContext";
 import UploadBlog from "./UploadBlog/UploadBlog";
 import { Button, message } from "antd";
+import { useParams } from "react-router-dom";
 
 // API Fetch Profile Data
 const fetchProfileData = async ({ queryKey }) => {
@@ -32,8 +33,8 @@ const Profile = () => {
   const queryClient = useQueryClient();
   const { setProfileData } = useContext(ProfileContext);
 
-  // Lấy userId từ localStorage
-  const userId = localStorage.getItem("loggedInUserId");
+  // Lấy userId từ URL qua useParams
+  const { userId } = useParams();
 
   // Fetch profile data using useQuery
   const { data: profileData, isLoading, isError, error } = useQuery({
@@ -72,9 +73,9 @@ const Profile = () => {
   if (isError) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="container" >
+    <div className="container">
       <Navigation />
-      <div className="profile" >
+      <div className="profile">
         <div className="cover-photo">
           <img
             src={profileData.coverPhoto || "default-cover-photo-url"}
@@ -88,6 +89,7 @@ const Profile = () => {
             alt=""
           />
           <h1>{profileData.nickname}</h1>
+          <p>User ID: {userId}</p>
         </div>
         <hr />
         <div className="profile-info">
@@ -108,11 +110,13 @@ const Profile = () => {
             {/* Render danh sách bạn bè nếu có */}
           </div>
         </div>
-        <div ><UpImgModal />
-          <UploadBlog /></div>
+        <div>
+          <UpImgModal />
+          <UploadBlog />
+        </div>
         <h2>Posts</h2>
         <hr />
-        <div className="post-container" >
+        <div className="post-container">
           {profileData.posts && profileData.posts.length > 0 ? (
             [...profileData.posts]
               .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))

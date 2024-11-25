@@ -4,6 +4,7 @@ import { Button } from "antd";
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import { ProfileContext } from "../../ProfileContext";
+import { Link, NavLink } from "react-router-dom";
 // API Fetch Profile Data
 const fetchProfileData = async ({ queryKey }) => {
   const userId = queryKey[1]; // Lấy userId từ queryKey
@@ -71,7 +72,7 @@ const Post = () => {
                   alt=""
                 />
                 <p>
-                  <h4>{post.author.nickname}</h4>
+                  <NavLink ><h4>{post.author.nickname}</h4></NavLink>
                   <span>{new Date(post.createdAt).toLocaleString()}</span>
                 </p>
               </div>

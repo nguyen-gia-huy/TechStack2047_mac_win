@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
   Navigate,
+  useParams,
 } from "react-router-dom";
 import Register from "./FirstPage/Register";
 import Login from "./FirstPage/Login";
@@ -29,7 +30,7 @@ const App = () => {
     // Đảm bảo chỉ có một BrowserRouter tại đây
     <>
       {" "}
-      <ProfileProvider>
+      <ProfileProvider >
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -44,7 +45,7 @@ const App = () => {
             }
           />
           <Route
-            path="/profile"
+            path="/profile/:userId"
             element={
               <ProtectedRoute>
                 <Profile />
