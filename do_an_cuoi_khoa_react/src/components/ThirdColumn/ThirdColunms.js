@@ -1,11 +1,14 @@
 import React from "react";
-import './ThirdColumn.css'
+
+import SearchUser from "../Navigation/SearchUser/searchUser";
+
 const ThirdColunms = () => {
   return (
     <div
       className="container-third-colum"
     >
-      <h1>cot thu 3</h1>
+    
+      <SearchUser />
     </div>
   );
 };

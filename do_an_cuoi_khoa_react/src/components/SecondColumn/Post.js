@@ -72,11 +72,11 @@ const Post = () => {
                   alt=""
                 />
                 <p>
-                  <NavLink ><h4>{post.author.nickname}</h4></NavLink>
+                  <Link to={`/profile/${post.author.id}`}><h4>{post.author.nickname}</h4></Link>
                   <span>{new Date(post.createdAt).toLocaleString()}</span>
                 </p>
               </div>
-              <p><strong>Content:</strong> {post.content}</p>
+              <p>{post.content}</p>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 {post.image && <img src={post.image} alt="Post" />}
               </div>

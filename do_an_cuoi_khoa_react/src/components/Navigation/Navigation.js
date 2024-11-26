@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
+
 import "./Navigation.css";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons"; // Import biểu tượng ngôi nhà
 import { ProfileContext } from "../../ProfileContext"; // Giả sử bạn dùng ProfileContext để lấy avatar
-
+import SearchUser from "./SearchUser/searchUser"; 
 const Navigation = () => {
   // const { profileData } = useContext(ProfileContext);
   const navigate = useNavigate();
@@ -21,16 +22,16 @@ const Navigation = () => {
 
   return (
     <div className="container-nav" >
-      <div className="right-top-nav" style={{justifyContent:'flex-start', display:'flex' }}>
+      <div className="right-top-nav" style={{ justifyContent: 'flex-start', display: 'flex' }}>
         <h1>Your page</h1>
         <Link to="/defaultPage">
           <FontAwesomeIcon
-            style={{ marginLeft:15 ,marginTop: 5, fontSize: 40 }}
+            style={{ marginLeft: 15, marginTop: 5, fontSize: 40 }}
             icon={faHouse}
           />
         </Link>
-      </div>
-    
+            </div>
+
       <div className="left-top-nav"  >
         <button onClick={handleLogout}>Logout</button>
         {/* Thay thế thẻ span bằng thẻ img */}

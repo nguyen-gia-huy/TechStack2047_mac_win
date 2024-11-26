@@ -1,0 +1,18 @@
+/* Search bar */
+.input-name {
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+    transition: border-color 0.3s;
+  }
+  .search-avatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+  }
+  .input-search-li{
+    width: 700px;
+  
+  }

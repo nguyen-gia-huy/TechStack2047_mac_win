@@ -1,16 +1,128 @@
-.container-nav{
-        border: 2px solid #bbc1c7;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 60px; /* Chiều cao header */
-        background-color: #0b78e4; /* Màu tối */
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 20px; /* Khoảng cách hai bên */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng đổ */
-        z-index: 1000; /* Đặt lên trên các thành phần khác */
-      }
-      
+/* Navigation container */
+.container-nav {
+  border: 2px solid #bbc1c7;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; /* Chiều cao header */
+  background-color: #0b78e4; /* Màu nền chính */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px; /* Khoảng cách hai bên */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng đổ */
+  z-index: 1000; /* Đặt lên trên các thành phần khác */
+  color: #fff; /* Màu chữ */
+  font-family: Arial, sans-serif;
+}
+
+/* Right navigation - Logo, Home icon, Search bar */
+.right-top-nav {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Khoảng cách giữa các phần tử */
+}
+
+/* Header title */
+.right-top-nav h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* Search bar */
+.right-top-nav input {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.right-top-nav input:focus {
+  border-color: #1890ff;
+}
+
+/* Search button */
+.right-top-nav button {
+  padding: 8px 15px;
+  background-color: #ff5722;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.right-top-nav button:hover {
+  background-color: #e64a19;
+}
+
+/* Home icon */
+.right-top-nav .fa-house {
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.right-top-nav .fa-house:hover {
+  color: #47b4df;
+}
+
+/* Left navigation - Logout button and avatar */
+.left-top-nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.left-top-nav button {
+  padding: 8px 15px;
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.left-top-nav button:hover {
+  background-color: #d32f2f;
+}
+
+
+
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container-nav {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
+  .right-top-nav,
+  .left-top-nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .right-top-nav input,
+  .right-top-nav button,
+  .left-top-nav button {
+    width: 100%;
+  }
+
+  .right-top-nav h1 {
+    font-size: 1.2rem;
+  }
+}
