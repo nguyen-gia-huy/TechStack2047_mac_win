@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 
 import "./Navigation.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons"; // Import biểu tượng ngôi nhà
 import { ProfileContext } from "../../ProfileContext"; // Giả sử bạn dùng ProfileContext để lấy avatar
- 
+
 const Navigation = () => {
   // const { profileData } = useContext(ProfileContext);
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const Navigation = () => {
   };
 
   return (
-    <div className="container-nav" >
+    <>    <div className="container-nav" >
       <div className="right-top-nav" style={{ justifyContent: 'flex-start', display: 'flex' }}>
         <h1>Your page</h1>
         <Link to="/defaultPage">
@@ -30,7 +30,7 @@ const Navigation = () => {
             icon={faHouse}
           />
         </Link>
-            </div>
+      </div>
 
       <div className="left-top-nav"  >
         <button onClick={handleLogout}>Logout</button>
@@ -48,6 +48,7 @@ const Navigation = () => {
         /> */}
       </div>
     </div>
+      <Outlet /></>
   );
 };
 

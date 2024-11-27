@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import "./Profile.css";
 import Navigation from "../Navigation/Navigation";
@@ -7,6 +7,7 @@ import { ProfileContext } from "../../ProfileContext";
 import UploadBlog from "./UploadBlog/UploadBlog";
 import { Button, message } from "antd";
 import { useParams } from "react-router-dom";
+import AddFriend from "./Addfriend/AddFriend";
 
 // API Fetch Profile Data
 const fetchProfileData = async ({ queryKey }) => {
@@ -31,6 +32,8 @@ const updateUserPosts = async ({ userId, updatedData }) => {
 const Profile = () => {
   const queryClient = useQueryClient();
   const { setProfileData } = useContext(ProfileContext);
+
+  const CurrentUserId = localStorage.getItem("loggedInUserId");
 
   // Lấy userId từ URL qua useParams
   const { userId } = useParams();
@@ -65,6 +68,7 @@ const Profile = () => {
 
     // Gửi mutation
     deletePostMutation.mutate({ userId, updatedData: updatedUserData });
+
   };
 
   // Loading and Error handling
@@ -110,9 +114,22 @@ const Profile = () => {
           </div>
         </div>
         <div>
-          <UpImgModal />
-          <UploadBlog />
+
+          {CurrentUserId === userId && (
+            <div>
+              <UpImgModal />
+              <UploadBlog />
+            </div>
+          )}
+          {
+            CurrentUserId !== userId && (
+              <div>
+                <AddFriend />
+              </div>
+            )
+          }
         </div>
+
         <h2>Posts</h2>
         <hr />
         <div className="post-container">
