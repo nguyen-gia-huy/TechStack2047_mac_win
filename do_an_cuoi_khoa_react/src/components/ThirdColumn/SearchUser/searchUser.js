@@ -1,43 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext, } from "react";
 import { Link } from "react-router-dom";
-import './searchUser.css'
+import "./searchUser.css";
+import { ProfileContext } from '../../../ProfileContext'
+
+
 const SearchUser = () => {
   const [nickname, setNickname] = useState("");
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const userId = localStorage.getItem("loggedInUserId");
 
   // Hàm tìm kiếm user theo nickname
   const handleSearch = async () => {
+
     setIsLoading(true);
     setError(null);
 
     try {
+
       const response = await fetch(`http://localhost:3000/users`);
+
       if (!response.ok) {
         throw new Error("Failed to fetch users");
       }
 
       const users = await response.json();
 
-      // Lọc các user có nickname khớp (không phân biệt chữ hoa/chữ thường)
-      const filteredUsers = users.filter((user) =>
-        user.nickname?.toLowerCase().includes(nickname.toLowerCase())
+      // Lọc kết quả: nickname khớp và không phải người dùng hiện tại
+      const filteredUsers = users.filter(
+        (user) =>
+          user.nickname?.toLowerCase().includes(nickname.toLowerCase()) && user.id !== userId
+        // Loại bỏ người dùng hiện tại
       );
-
 
       setResults(filteredUsers);
     } catch (err) {
       setError(err.message);
     } finally {
       setIsLoading(false);
+      console.log(userId)
+
     }
+
   };
 
   return (
-    <div >
+    <div>
       <h3>Search User by Nickname</h3>
-      <input className="input-name"
+      <input
+        className="input-name"
         type="text"
         placeholder="Enter nickname"
         value={nickname}
@@ -49,7 +61,8 @@ const SearchUser = () => {
           borderRadius: "5px",
         }}
       />
-      <button className="input-name"
+      <button
+        className="input-name"
         onClick={handleSearch}
         style={{
           padding: "10px 15px",
@@ -72,16 +85,16 @@ const SearchUser = () => {
         {results.length > 0 ? (
           <ul style={{ listStyle: "none", padding: 0 }}>
             {results.map((user) => (
-              <Link to={`/profile/${user.id}`}
-                key={user.id}
-
-              >
-                <div className="input-search-li"><img
-                  className="search-avatar"
-                  src={user.avatar || "default-avatar-url"}
-                  alt=""
-                /> {user.nickname}
-                  <br /></div>
+              <Link to={`/profile/${user.id}`} key={user.id}>
+                <div className="input-search-li">
+                  <img
+                    className="search-avatar"
+                    src={user.avatar || "default-avatar-url"}
+                    alt=""
+                  />{" "}
+                  {user.nickname}
+                  <br />
+                </div>
               </Link>
             ))}
           </ul>

@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons"; // Import biểu tượng ngôi nhà
 import { ProfileContext } from "../../ProfileContext"; // Giả sử bạn dùng ProfileContext để lấy avatar
-import SearchUser from "./SearchUser/searchUser"; 
+ 
 const Navigation = () => {
   // const { profileData } = useContext(ProfileContext);
   const navigate = useNavigate();

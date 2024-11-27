@@ -6,8 +6,11 @@ export const ProfileContext = createContext();
 // Tạo provider để bao bọc các component cần truy cập dữ liệu
 export const ProfileProvider = ({ children }) => {
   const [profileData, setProfileData] = useState({
+    id: null,
+    nickname:null,
     avatar: null,
     coverPhoto: null,
+
   });
 
   return (

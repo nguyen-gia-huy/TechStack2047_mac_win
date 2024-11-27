@@ -27,8 +27,7 @@ const updateUserPosts = async ({ userId, updatedData }) => {
   });
   if (!response.ok) throw new Error("Failed to update user posts");
   return response.json();
-};
-
+}
 const Profile = () => {
   const queryClient = useQueryClient();
   const { setProfileData } = useContext(ProfileContext);

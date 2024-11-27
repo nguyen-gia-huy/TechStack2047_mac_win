@@ -1,6 +1,6 @@
 import React from "react";
 
-import SearchUser from "../Navigation/SearchUser/searchUser";
+import SearchUser from "./SearchUser/searchUser";
 
 const ThirdColunms = () => {
   return (
