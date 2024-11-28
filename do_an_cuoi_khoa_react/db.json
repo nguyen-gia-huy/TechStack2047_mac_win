@@ -97,7 +97,21 @@
       "password": "123",
       "nickname": "tài văn tử",
       "gender": "male",
-      "dateOfBirth": "2024-11-21"
+      "dateOfBirth": "2024-11-21",
+      "posts": [
+        {
+          "id": "1732721257529",
+          "content": "123",
+          "image": null,
+          "createdAt": "2024-11-27T15:27:37.529Z"
+        },
+        {
+          "id": "1732721271114",
+          "content": "ádda",
+          "image": null,
+          "createdAt": "2024-11-27T15:27:51.114Z"
+        }
+      ]
     }
   ]
 }

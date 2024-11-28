@@ -1,0 +1,36 @@
+user[
+{
+id:1,
+friend[],
+incomingFriendRequest[],
+outcomingFriendRequest[],
+},
+{
+id:2,
+friend[],
+incomingFriendRequest[],
+outcomingFriendRequest[],
+}
+]
+-----------------------------------------------------------------------------------------------------------
+mảng (Friend): [] => chứa những lời mới kết bạn đã được accept thành công
+mảng (incomingFriendRequest): [] => chứa những lời mời kết bạn đang chờ được đồng ý (đây sẽ là những lời mời mà user khác gửi đến cho user này)
+mảng (outcomingFriendRequest): [] => chứa những lời mới kết bạn mà user này đã gửi đến cho những user khác
+-----------------------------------------------------------------------------------------------------------
+-người dùng 2 sẽ là người gửi lời mời kết bạn
+-người dùng 1 sẽ là người được gửi lời mời kết bạn
+-----------------------------------------------------------------------------------------------------------
+có 5 hàm:
+-handleSendFriendRequest
+-handleAcceptFriendRequest
+-handleRejectFriendRequest
+-handleDeleteFriend
+-handleCancelSentFriendRequest
+-----------------------------------------------------------------------------------------------------------
+
+chức năng:
+-handleSendFriendRequest: post id người dùng Id: 2 vào mảng incomingFriendRequest của người dùng Id: 1 && lưu Id:1 vào mảng outcomingFriendRequest của Id:2
+-handleAcceptFriendRequest: post Id: 2 vào mảng Friend của Id:1 và ngược lại,  xóa Id: 2 ở mảng incomingFriendRequest của Id: 1, xóa Id: 1 ở mảng outcomingFriendRequest của Id:2
+-handleRejectFriendRequest: xóa id: 2 ở mảng incomingFriendRequest của người dùng 1, và xóa Id: 1 ở mảng outcomingFriendRequest của Id: 2
+-handleDeleteFriendRequest: xóa id: 2 ở mảng friend của Id: 1   và xóa Id: 1 ởa mảng Friend của Id:2
+-handleCancelSentFriendRequest: xóa id: 1 ở mảng outcomingFriendRequest Id: 2, và xóa Id:2 ở mảng incomingFriendRequest của id 1
