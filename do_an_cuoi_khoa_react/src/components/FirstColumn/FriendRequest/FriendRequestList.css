@@ -1,0 +1,7 @@
+.FriendRequestList-container{
+    margin-top: 70px;
+    display: flex;
+    justify-self: center;
+    width: 1200px;
+    border: 2px solid black;
+}

@@ -13,6 +13,7 @@ import Profile from "./components/Profile/Profile";
 import { ProfileProvider } from "./ProfileContext";
 import DefaultPage from "./components/DefaultLayout/DefaultPage";
 import FriendList from "./components/FirstColumn/FriendList/FriendList";
+import FriendRequestList from "./components/FirstColumn/FriendRequest/FriendRequestList";
 
 // Component bảo vệ để kiểm tra trạng thái đăng nhập
 const ProtectedRoute = ({ children }) => {
@@ -47,6 +48,7 @@ const App = () => {
             }
           />
            <Route path="/friends-list" element={<FriendList/>}/>
+           <Route path="/friends-request-list"element={<FriendRequestList/>}/>
           <Route
             path="/profile/:userId"
             element={

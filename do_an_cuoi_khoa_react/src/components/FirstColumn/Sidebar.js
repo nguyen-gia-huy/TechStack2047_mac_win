@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Sidebar.css";
-import FriendList from "./FriendList/FriendList";
 
 const Sidebar = () => {
   // Lấy userId từ localStorage
@@ -21,6 +20,9 @@ const Sidebar = () => {
         </Link>
         <Link to="/add-blog" className="nav-link">
           Add New Blog
+        </Link>
+        <Link to="/friends-request-list" className="nav-link">
+          Friend Request List
         </Link>
       </nav>
     </div>

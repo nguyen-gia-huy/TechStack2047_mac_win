@@ -63,6 +63,9 @@
           "image": null,
           "createAt": "2024-11-19T22:28:06.418Z"
         }
+      ],
+      "OutcomingFriendRequest": [
+        "dc44"
       ]
     },
     {
@@ -89,7 +92,18 @@
       "password": "123",
       "nickname": "Lung Thị Linh",
       "gender": "female",
-      "dateOfBirth": "2024-11-28"
+      "dateOfBirth": "2024-11-28",
+      "posts": [
+        {
+          "id": "1732819500639",
+          "content": "123",
+          "image": null,
+          "createdAt": "2024-11-28T18:45:00.639Z"
+        }
+      ],
+      "OutcomingFriendRequest": [
+        "dc44"
+      ]
     },
     {
       "id": "dc44",
@@ -98,19 +112,10 @@
       "nickname": "tài văn tử",
       "gender": "male",
       "dateOfBirth": "2024-11-21",
-      "posts": [
-        {
-          "id": "1732721257529",
-          "content": "123",
-          "image": null,
-          "createdAt": "2024-11-27T15:27:37.529Z"
-        },
-        {
-          "id": "1732721271114",
-          "content": "ádda",
-          "image": null,
-          "createdAt": "2024-11-27T15:27:51.114Z"
-        }
+      "posts": [],
+      "IncomingFriendRequest": [
+        "fc7f",
+        "907b"
       ]
     }
   ]
