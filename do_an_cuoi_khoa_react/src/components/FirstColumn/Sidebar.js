@@ -18,9 +18,7 @@ const Sidebar = () => {
         <Link to="/friends-list" className="nav-link" >
           Your Friends 
         </Link>
-        <Link to="/add-blog" className="nav-link">
-          Add New Blog
-        </Link>
+     
         <Link to="/friends-request-list" className="nav-link">
           Friend Request List
         </Link>

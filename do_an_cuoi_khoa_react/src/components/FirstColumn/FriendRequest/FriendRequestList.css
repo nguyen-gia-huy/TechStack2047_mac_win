@@ -1,7 +1,13 @@
 .FriendRequestList-container{
-    margin-top: 70px;
-    display: flex;
+    margin-top: 80px;
+    background-color: #f0f2f5;
+    border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     justify-self: center;
-    width: 1200px;
-    border: 2px solid black;
+    width: 1000px;
+    
+}
+
+.friendRequestUnique img{
+    
+    width: 120px;
 }
