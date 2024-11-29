@@ -1,121 +1,136 @@
 import { Button, message } from "antd";
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const AddFriend = () => {
   const [loading, setLoading] = useState(false);
-  const [friendRequestSent, setFriendRequestSent] = useState(false); // Trạng thái gửi lời mời
+  const [friendRequestSent, setFriendRequestSent] = useState(false);
+  const [isFriend, setIsFriend] = useState(false); // Kiểm tra trạng thái bạn bè
   const userIdSender = localStorage.getItem("loggedInUserId");
-  const { userId } = useParams(); // Đây là userId của người nhận
+  const { userId } = useParams(); // ID người nhận
 
-  // Kiểm tra xem người gửi đã gửi lời mời hay chưa
+  // Kiểm tra trạng thái bạn bè và lời mời
   useEffect(() => {
-    const checkFriendRequestStatus = async () => {
-      const responseSender = await fetch(`http://localhost:3000/users/${userIdSender}`);
-      const responseReceiver = await fetch(`http://localhost:3000/users/${userId}`);
-      const userDataSender = await responseSender.json();
-      const userDataReceiver = await responseReceiver.json();
+    const checkStatus = async () => {
+      try {
+        const [senderData, receiverData] = await Promise.all([
+          axios.get(`http://localhost:3000/users/${userIdSender}`),
+          axios.get(`http://localhost:3000/users/${userId}`),
+        ]);
 
-      // Kiểm tra nếu người gửi đã gửi lời mời
-      if (userDataSender.OutcomingFriendRequest.includes(userId) || userDataReceiver.IncomingFriendRequest.includes(userIdSender)) {
-        setFriendRequestSent(true); // Đánh dấu là đã gửi lời mời
+        const sender = senderData.data;
+        const receiver = receiverData.data;
+
+        // Kiểm tra trạng thái bạn bè
+        if (sender.friends.includes(userId) && receiver.friends.includes(userIdSender)) {
+          setIsFriend(true);
+        }
+
+        // Kiểm tra trạng thái lời mời kết bạn
+        if (
+          sender.OutcomingFriendRequest?.includes(userId) ||
+          receiver.IncomingFriendRequest?.includes(userIdSender)
+        ) {
+          setFriendRequestSent(true);
+        }
+      } catch (error) {
+        console.error("Lỗi khi kiểm tra trạng thái:", error);
       }
     };
 
-    checkFriendRequestStatus();
+    checkStatus();
   }, [userIdSender, userId]);
 
+  // Gửi hoặc hủy lời mời kết bạn
   const handleSendFriendRequest = async () => {
-    setLoading(true); // Bắt đầu trạng thái loading
+    setLoading(true);
     try {
-      const responseSender = await fetch(`http://localhost:3000/users/${userIdSender}`);
-      const responseReceiver = await fetch(`http://localhost:3000/users/${userId}`);
-      const userDataSender = await responseSender.json();
-      const userDataReceiver = await responseReceiver.json();
+      const [senderData, receiverData] = await Promise.all([
+        axios.get(`http://localhost:3000/users/${userIdSender}`),
+        axios.get(`http://localhost:3000/users/${userId}`),
+      ]);
+
+      const sender = senderData.data;
+      const receiver = receiverData.data;
 
       if (friendRequestSent) {
-        // Hủy lời mời nếu đã gửi
-        const updatedSender = {
-          ...userDataSender,
-          OutcomingFriendRequest: userDataSender.OutcomingFriendRequest.filter(id => id !== userId),
-        };
-        const updatedReceiver = {
-          ...userDataReceiver,
-          IncomingFriendRequest: userDataReceiver.IncomingFriendRequest.filter(id => id !== userIdSender),
-        };
-
-        await fetch(`http://localhost:3000/users/${userIdSender}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedSender),
-        });
-
-        await fetch(`http://localhost:3000/users/${userId}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedReceiver),
-        });
-
+        // Hủy lời mời kết bạn
+        await Promise.all([
+          axios.put(`http://localhost:3000/users/${userIdSender}`, {
+            ...sender,
+            OutcomingFriendRequest: sender.OutcomingFriendRequest.filter((id) => id !== userId),
+          }),
+          axios.put(`http://localhost:3000/users/${userId}`, {
+            ...receiver,
+            IncomingFriendRequest: receiver.IncomingFriendRequest.filter((id) => id !== userIdSender),
+          }),
+        ]);
         message.success("Lời mời kết bạn đã bị hủy!");
       } else {
         // Gửi lời mời kết bạn
-        const updatedSender = {
-          ...userDataSender,
-          OutcomingFriendRequest: [
-            ...(userDataSender.OutcomingFriendRequest || []),
-            userId,
-          ],
-        };
-
-        const updatedReceiver = {
-          ...userDataReceiver,
-          IncomingFriendRequest: [
-            ...(userDataReceiver.IncomingFriendRequest || []),
-            userIdSender,
-          ],
-        };
-
-        await fetch(`http://localhost:3000/users/${userIdSender}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedSender),
-        });
-
-        await fetch(`http://localhost:3000/users/${userId}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedReceiver),
-        });
-
+        await Promise.all([
+          axios.put(`http://localhost:3000/users/${userIdSender}`, {
+            ...sender,
+            OutcomingFriendRequest: [...(sender.OutcomingFriendRequest || []), userId],
+          }),
+          axios.put(`http://localhost:3000/users/${userId}`, {
+            ...receiver,
+            IncomingFriendRequest: [...(receiver.IncomingFriendRequest || []), userIdSender],
+          }),
+        ]);
         message.success("Gửi lời mời kết bạn thành công!");
       }
 
-      // Toggle trạng thái lời mời
       setFriendRequestSent(!friendRequestSent);
     } catch (error) {
-      console.error("Lỗi khi gửi hoặc hủy lời mời kết bạn:", error);
+      console.error("Lỗi khi gửi hoặc hủy lời mời:", error);
       message.error("Lỗi khi xử lý lời mời kết bạn!");
     } finally {
-      setLoading(false); // Kết thúc trạng thái loading
+      setLoading(false);
+    }
+  };
+
+  // Hủy bạn bè
+  const handleDeleteFriend = async () => {
+    setLoading(true);
+    try {
+      const [senderData, receiverData] = await Promise.all([
+        axios.get(`http://localhost:3000/users/${userIdSender}`),
+        axios.get(`http://localhost:3000/users/${userId}`),
+      ]);
+
+      const sender = senderData.data;
+      const receiver = receiverData.data;
+
+      await Promise.all([
+        axios.put(`http://localhost:3000/users/${userIdSender}`, {
+          ...sender,
+          friends: sender.friends.filter((id) => id !== userId),
+        }),
+        axios.put(`http://localhost:3000/users/${userId}`, {
+          ...receiver,
+          friends: receiver.friends.filter((id) => id !== userIdSender),
+        }),
+      ]);
+      message.success("Đã hủy bạn bè!");
+      setIsFriend(false);
+    } catch (error) {
+      console.error("Lỗi khi hủy bạn bè:", error);
+      message.error("Lỗi khi xử lý hủy bạn bè!");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <Button
-      onClick={handleSendFriendRequest}
+      onClick={isFriend ? handleDeleteFriend : handleSendFriendRequest}
       loading={loading}
       style={{ width: "300px" }}
       type="primary"
     >
-      {friendRequestSent ? "Sent , click one more to reject" : "Add Friend"}
+      {isFriend ? "Hủy kết bạn" : friendRequestSent ? "Hủy lời mời kết bạn" : "Kết bạn"}
     </Button>
   );
 };
