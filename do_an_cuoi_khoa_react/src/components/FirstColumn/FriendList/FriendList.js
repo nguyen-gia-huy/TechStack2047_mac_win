@@ -67,7 +67,7 @@ const FriendList = () => {
     }
   };
 
- 
+
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -82,7 +82,7 @@ const FriendList = () => {
       <Navigation />
       <div className="container-noidung">
         <h1>Friend List</h1>
-       
+
         <div className="friendRequestUnique">
           {data.map((friend) => (
             <div key={friend.id}>

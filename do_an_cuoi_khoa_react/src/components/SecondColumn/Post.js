@@ -5,6 +5,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import { ProfileContext } from "../../ProfileContext";
 import { Link, NavLink } from "react-router-dom";
+import Comment from "./Comment";
 // API Fetch Profile Data
 const fetchProfileData = async ({ queryKey }) => {
   const userId = queryKey[1]; // Lấy userId từ queryKey
@@ -81,6 +82,7 @@ const Post = () => {
                 {post.image && <img src={post.image} alt="Post" />}
               </div>
               <hr />
+              <Comment/>
             </div>
           ))
         ) : (
