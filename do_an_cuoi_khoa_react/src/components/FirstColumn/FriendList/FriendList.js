@@ -1,13 +1,17 @@
-import React, { useState } from 'react'
-import Navigation from '../../Navigation/Navigation'
-import './FriendList.css'
-import axios from 'axios';
+import React from "react";
+import Navigation from "../../Navigation/Navigation";
+import "./FriendList.css";
+import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { Button, message } from "antd";
 
 const FriendList = () => {
-
   const userIdSender = localStorage.getItem("loggedInUserId");
+
   const fetchFriendList = async () => {
+    if (!userIdSender) {
+      return []; // Trả về danh sách bạn bè rỗng nếu user chưa đăng nhập
+    }
     const { data: userData } = await axios.get(
       `http://localhost:3000/users/${userIdSender}`
     );
@@ -15,19 +19,56 @@ const FriendList = () => {
       userData.friends.map((friendId) =>
         axios.get(`http://localhost:3000/users/${friendId}`).then((res) => res.data)
       )
-    )
-    return friendList
-  }
-  // Sử dụng React Query để quản lý dữ liệu
-  const query = useQuery({
+    );
+    return friendList;
+  };
+
+  const { data, error, isLoading } = useQuery({
     queryKey: ["friends", userIdSender],
     queryFn: fetchFriendList,
+    enabled: !!userIdSender, // Ngăn chặn việc fetch nếu userIdSender là null
   });
 
-  const { data, error, isLoading } = query;
+  const handleDeleteFriend = async (friendId) => {
+    try {
+      const responseSender = await fetch(`http://localhost:3000/users/${userIdSender}`);
+      const responseReceiver = await fetch(`http://localhost:3000/users/${friendId}`);
+      const userDataSender = await responseSender.json();
+      const userDataReceiver = await responseReceiver.json();
 
+      const updatedSender = {
+        ...userDataSender,
+        friends: userDataSender.friends.filter((id) => id !== friendId),
+      };
+      const updatedReceiver = {
+        ...userDataReceiver,
+        friends: userDataReceiver.friends.filter((id) => id !== userIdSender),
+      };
 
-  // Xử lý trạng thái khi đang loading hoặc lỗi
+      await fetch(`http://localhost:3000/users/${userIdSender}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedSender),
+      });
+      await fetch(`http://localhost:3000/users/${friendId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedReceiver),
+      });
+
+      message.success("Đã hủy kết bạn!");
+    } catch (error) {
+      console.error("Error refuse friend :", error);
+      message.error("Lỗi khi hủy kết bạn!");
+    }
+  };
+
+ 
+
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
@@ -35,31 +76,29 @@ const FriendList = () => {
   if (error) {
     return <h1>Error: {error.message}</h1>;
   }
+
   return (
-
-    <div className='container'>
+    <div className="container">
       <Navigation />
-
-      <div className='container-noidung'>
-        <h1>Friend List </h1>
-        <p>`{userIdSender}`</p>
+      <div className="container-noidung">
+        <h1>Friend List</h1>
+       
         <div className="friendRequestUnique">
           {data.map((friend) => (
-            <div key={friend.id} >
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '15px' }}>
-                <div style={{ display: 'flex' }}>
-                  <img src={friend.avatar}></img>
-                  <h2>{friend.nickname}</h2></div>
-                <h3>{friend.id}</h3>
-
+            <div key={friend.id}>
+              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "15px" }}>
+                <div style={{ display: "flex" }}>
+                  <img src={friend.avatar || "default-avatar-url.png"} alt="Avatar" />
+                  <h2>{friend.nickname || "No nickname"}</h2>
+                </div>
+                <Button onClick={() => handleDeleteFriend(friend.id)}>Hủy kết bạn</Button>
               </div>
             </div>
           ))}
         </div>
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default FriendList
+export default FriendList;

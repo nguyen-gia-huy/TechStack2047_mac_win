@@ -7,8 +7,6 @@ import { Button, message } from "antd";
 
 const FriendRequestList = () => {
   const [loading, setLoading] = useState(false);
-  const [isAccepted, setIsAccepted] = useState(false)
-  const [isRejected, setIsRejected] = useState(false)
   const userId = localStorage.getItem("loggedInUserId"); //receiver
   
   // Hàm fetch dữ liệu user và các yêu cầu kết bạn

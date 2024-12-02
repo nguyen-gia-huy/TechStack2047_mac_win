@@ -72,7 +72,7 @@ const Post = () => {
                   alt=""
                 />
                 <p>
-                  <Link to={`/profile/${post.author.id}`}><h4>{post.author.nickname}</h4></Link>
+                  <Link to={`/profile/${post.author.id}`}><h4 >{post.author.nickname}</h4></Link>
                   <span>{new Date(post.createdAt).toLocaleString()}</span>
                 </p>
               </div>
