@@ -4,7 +4,6 @@ import Navigation from "../../Navigation/Navigation";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { Button, message } from "antd";
-import Sidebar from "../Sidebar";
 
 const FriendRequestList = () => {
   const [loading, setLoading] = useState(false);

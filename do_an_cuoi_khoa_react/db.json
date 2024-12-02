@@ -65,7 +65,10 @@
         }
       ],
       "OutcomingFriendRequest": [],
-      "IncomingFriendRequest": []
+      "IncomingFriendRequest": [],
+      "friends": [
+        "75e6"
+      ]
     },
     {
       "id": "ab6b",
@@ -127,7 +130,8 @@
       "dateOfBirth": "2024-11-21",
       "IncomingFriendRequest": [],
       "friends": [
-        "dc44"
+        "dc44",
+        "907b"
       ],
       "OutcomingFriendRequest": []
     }
