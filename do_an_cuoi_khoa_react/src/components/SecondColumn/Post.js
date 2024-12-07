@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import "./Post.css";
-import { Button } from "antd";
+
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import { ProfileContext } from "../../ProfileContext";
 import { Link, NavLink } from "react-router-dom";
-import Comment from "./Comment";
+import Comment from "./Comment/Comment";
+import CmtModal from "./commentModal/CmtsModal";
+
 // API Fetch Profile Data
 const fetchProfileData = async ({ queryKey }) => {
   const userId = queryKey[1]; // Lấy userId từ queryKey
@@ -31,7 +33,10 @@ const fetchAllPosts = async () => {
 
   return allPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 };
-
+const fetchComments = async () =>{
+  const response = await axios.get(`http://localhost:3000/comments`)
+  return response.data
+}
 const Post = () => {
   const queryClient = useQueryClient();
   const { setProfileData } = useContext(ProfileContext);
@@ -48,16 +53,22 @@ const Post = () => {
     queryFn: fetchAllPosts,
 
   });
-
-  if (isLoading) {
+  const { data: comments, isLoading: commentsLoading, error: commentsError } =
+    useQuery({
+      queryKey: ["comments"],
+      queryFn: fetchComments,
+    });
+  if (isLoading, commentsLoading) {
     return <h1>loading</h1>
   }
-  if (error) {
+  if (error, commentsError) {
     return <h1>error: {error.message}</h1>
   }
   return (
+
     <div className="containerPostDefault">
       <h2>All Posts</h2>
+
       <div>
         {isLoading ? (
           <p>Loading posts...</p>
@@ -73,8 +84,10 @@ const Post = () => {
                   alt=""
                 />
                 <p>
-                  <Link to={`/profile/${post.author.id}`}><h4 >{post.author.nickname}</h4></Link>
+                  <Link to={`/profile/${post.author.id}`}><h4>{post.author.nickname}</h4></Link>
                   <span>{new Date(post.createdAt).toLocaleString()}</span>
+                  <br />
+                  <span>Id post: {(post.id)}</span>
                 </p>
               </div>
               <p>{post.content}</p>
@@ -82,14 +95,21 @@ const Post = () => {
                 {post.image && <img src={post.image} alt="Post" />}
               </div>
               <hr />
-              <Comment/>
+              <Comment
+                comments={comments.filter((comment) => comment.postId === post.id)}
+              />
+              {/* Modal để thêm bình luận */}
+              <CmtModal postId={post.id} />
             </div>
+
           ))
         ) : (
           <p>No posts available!</p>
         )}
       </div>
+
     </div>
+
   );
 
 

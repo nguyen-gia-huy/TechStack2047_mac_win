@@ -1,21 +1,6 @@
 {
   "users": [
     {
-      "id": "1",
-      "email": "user1@example.com",
-      "password": "123456"
-    },
-    {
-      "id": "2",
-      "email": "user2@example.com",
-      "password": "abcdef"
-    },
-    {
-      "id": "3",
-      "email": "user3@example.com",
-      "password": "qwerty"
-    },
-    {
       "id": "907b",
       "email": "nguyenhuy3112005@gmail.com",
       "password": "3112005",
@@ -131,7 +116,24 @@
       "dateOfBirth": "2024-11-21",
       "IncomingFriendRequest": [],
       "friends": [],
-      "OutcomingFriendRequest": []
+      "OutcomingFriendRequest": [],
+      "posts": [
+        {
+          "id": "1733241597776",
+          "content": "hello",
+          "image": null,
+          "createdAt": "2024-12-03T15:59:57.776Z"
+        }
+      ]
+    }
+  ],
+  "comments": [
+    {
+      "id": "1733578141090",
+      "postId": "1733241597776",
+      "userId": "75e6",
+      "content": "abc",
+      "createdAt": "2024-12-07T13:29:01.090Z"
     }
   ]
 }
