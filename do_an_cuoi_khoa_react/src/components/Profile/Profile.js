@@ -8,6 +8,9 @@ import UploadBlog from "./UploadBlog/UploadBlog";
 import { Button, message } from "antd";
 import { useParams } from "react-router-dom";
 import AddFriend from "./Addfriend/AddFriend";
+import Like from "../SecondColumn/Like/Like";
+import CmtModal from "../SecondColumn/commentModal/CmtsModal";
+import Comment from "../SecondColumn/Comment/Comment";
 
 // API Fetch Profile Data
 const fetchProfileData = async ({ queryKey }) => {
@@ -16,7 +19,11 @@ const fetchProfileData = async ({ queryKey }) => {
   if (!response.ok) throw new Error("Failed to fetch profile data");
   return response.json();
 };
-
+const fetchComments = async () => {
+  const response = await fetch("http://localhost:3000/comments");
+  if (!response.ok) throw new Error("Failed to fetch comments");
+  return response.json();
+};
 // API Update User Data
 const updateUserPosts = async ({ userId, updatedData }) => {
   const response = await fetch(`http://localhost:3000/users/${userId}`, {
@@ -32,7 +39,7 @@ const updateUserPosts = async ({ userId, updatedData }) => {
 
 const Profile = () => {
   const queryClient = useQueryClient();
-  const { setProfileData } = useContext(ProfileContext);
+  const { setProfileData, setCommentProfile } = useContext(ProfileContext);
 
   const CurrentUserId = localStorage.getItem("loggedInUserId");
 
@@ -44,6 +51,11 @@ const Profile = () => {
     queryKey: ["profileData", userId],
     queryFn: fetchProfileData,
     onSuccess: (data) => setProfileData(data), // Cập nhật Context khi fetch thành công
+  });
+  // Fetch comments
+  const { data: comments, isLoading: loadingComments } = useQuery({
+    queryKey: ["comments"],
+    queryFn: fetchComments,
   });
 
   // Mutation for deleting a post
@@ -155,15 +167,27 @@ const Profile = () => {
                     {post.image && <img src={post.image} alt="Post" />}
                   </div>
                   <hr />
-
-                  <Button
-                    type="primary"
-                    danger
-                    onClick={() => handleDeletePost(post.id)}
-                    style={{ marginTop: "10px" }}
-                  >
-                    Delete
-                  </Button>
+                  {/* Hiển thị các bình luận liên quan đến bài viết */}
+                  <div>
+                  </div>
+                  {CurrentUserId === userId && (
+                    <Button
+                      type="primary"
+                      danger
+                      onClick={() => handleDeletePost(post.id)}
+                      style={{ marginTop: "10px" }}
+                    >
+                      Delete Post
+                    </Button>
+                  )}
+                  <Comment
+                    comments={comments.filter((comment) => comment.postId === post.id)}
+                  />
+                  {/* Modal để thêm bình luận */}
+                  <div style={{ display: 'flex' }}>
+                    <Like />
+                    <CmtModal postId={post.id} />
+                  </div>
                 </div>
               ))
           ) : (

@@ -7,6 +7,7 @@ import { ProfileContext } from "../../ProfileContext";
 import { Link, NavLink } from "react-router-dom";
 import Comment from "./Comment/Comment";
 import CmtModal from "./commentModal/CmtsModal";
+import Like from "./Like/Like";
 
 // API Fetch Profile Data
 const fetchProfileData = async ({ queryKey }) => {
@@ -40,7 +41,7 @@ const fetchComments = async () =>{
 const Post = () => {
   const queryClient = useQueryClient();
   const { setProfileData } = useContext(ProfileContext);
-
+  
   const userId = localStorage.getItem("loggedInUserId");
 
   const { data: profileData } = useQuery({
@@ -86,8 +87,7 @@ const Post = () => {
                 <p>
                   <Link to={`/profile/${post.author.id}`}><h4>{post.author.nickname}</h4></Link>
                   <span>{new Date(post.createdAt).toLocaleString()}</span>
-                  <br />
-                  <span>Id post: {(post.id)}</span>
+                 
                 </p>
               </div>
               <p>{post.content}</p>
@@ -95,11 +95,15 @@ const Post = () => {
                 {post.image && <img src={post.image} alt="Post" />}
               </div>
               <hr />
+             
               <Comment
                 comments={comments.filter((comment) => comment.postId === post.id)}
               />
               {/* Modal để thêm bình luận */}
+              <div style={{display:'flex'}}>
+              <Like />
               <CmtModal postId={post.id} />
+              </div>
             </div>
 
           ))

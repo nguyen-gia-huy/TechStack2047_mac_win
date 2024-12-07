@@ -12,9 +12,15 @@ export const ProfileProvider = ({ children }) => {
     coverPhoto: null,
 
   });
-
+  const [commentsProfile, setCommentProfile]= useState({
+    id:null,
+    postId: null,
+    userId:null,
+    content:null,
+    createAt:null,
+  })
   return (
-    <ProfileContext.Provider value={{ profileData, setProfileData }}>
+    <ProfileContext.Provider value={{ profileData, setProfileData,commentsProfile, setCommentProfile }}>
       {children}
     </ProfileContext.Provider>
   );
