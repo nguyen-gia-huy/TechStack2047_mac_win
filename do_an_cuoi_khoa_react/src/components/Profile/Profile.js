@@ -142,7 +142,6 @@ const Profile = () => {
             )
           }
         </div>
-
         <h2>Posts</h2>
         <hr />
         <div className="post-container">

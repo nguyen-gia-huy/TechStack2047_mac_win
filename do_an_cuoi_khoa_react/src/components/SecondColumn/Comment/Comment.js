@@ -24,7 +24,7 @@ const Comment = ({ comments, setComments }) => {
 
     // Tìm user dựa vào userId trong comment
     const findUserById = (userId) => users.find((user) => user.id === userId);
-
+    
     const handleDeleteComment = async (commentId) => {
         try {
             const response = await fetch(`http://localhost:3000/comments/${commentId}`, {
@@ -44,7 +44,7 @@ const Comment = ({ comments, setComments }) => {
             alert("Error deleting comment!");
         }
     };
-
+   
     return (
         <div>
             <h5>Comments</h5>
@@ -102,6 +102,7 @@ const Comment = ({ comments, setComments }) => {
                             >
                                 Delete
                             </button>
+                            
                         </div>
                     );
                 })

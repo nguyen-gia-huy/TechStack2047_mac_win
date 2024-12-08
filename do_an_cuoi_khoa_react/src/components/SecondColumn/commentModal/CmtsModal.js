@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Button, Form, Input } from "antd";
 import axios from "axios";
 
 const CmtModal = ({ postId }) => {

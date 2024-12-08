@@ -41,7 +41,7 @@ const fetchComments = async () =>{
 const Post = () => {
   const queryClient = useQueryClient();
   const { setProfileData } = useContext(ProfileContext);
-  
+
   const userId = localStorage.getItem("loggedInUserId");
 
   const { data: profileData } = useQuery({
@@ -85,7 +85,7 @@ const Post = () => {
                   alt=""
                 />
                 <p>
-                  <Link to={`/profile/${post.author.id}`}><h4>{post.author.nickname}</h4></Link>
+                  <Link style={{textDecoration:'none'}} to={`/profile/${post.author.id}`}><h4 >{post.author.nickname}</h4></Link>
                   <span>{new Date(post.createdAt).toLocaleString()}</span>
                  
                 </p>
