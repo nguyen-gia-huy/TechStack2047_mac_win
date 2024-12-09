@@ -3,7 +3,7 @@ import axios from "axios";
 
 const Comment = ({ comments, setComments }) => {
   const [users, setUsers] = useState([]);
-
+  const CurrentUserId = localStorage.getItem("loggedInUserId");
   // Fetch dữ liệu user khi component được render
   useEffect(() => {
     const fetchUsers = async () => {
@@ -20,6 +20,20 @@ const Comment = ({ comments, setComments }) => {
 
   // Tìm user dựa vào userId trong comment
   const findUserById = (userId) => users.find((user) => user.id === userId);
+
+  // Hàm tìm user của người đăng bài
+  const findUserPostByIdPost = (postId) => {
+    const userWithPost = users.find(
+      (user) =>
+        user.posts &&
+        Array.isArray(user.posts) &&
+        user.posts.some((post) => post.id === postId)
+    );
+    return userWithPost ? userWithPost.id : null; // Trả về userId nếu tìm thấy, ngược lại trả về null
+  };
+  const abc = () => {
+    console.log(CurrentUserId);
+  };
 
   const handleDeleteComment = async (commentId) => {
     try {
@@ -45,6 +59,8 @@ const Comment = ({ comments, setComments }) => {
       {comments.length > 0 ? (
         comments.map((comment) => {
           const user = findUserById(comment.userId); // Lấy thông tin user tương ứng
+          const postOwnerId = findUserPostByIdPost(comment.postId); // Lấy userId của người đăng bài
+
           return (
             <div
               key={comment.id}
@@ -91,21 +107,27 @@ const Comment = ({ comments, setComments }) => {
                   <p>{comment.content}</p>
                 </div>
               </div>
-              <button
-                onClick={() => handleDeleteComment(comment.id)}
-                style={{
-                  marginBottom: "100px",
-                  borderRadius: "10px",
-                  marginLeft: "auto",
-                  padding: "5px 10px",
-                  backgroundColor: "#ff4d4f",
-                  color: "white",
-                  border: "none",
-                  cursor: "pointer",
-                }}
-              >
-                Delete
-              </button>
+              <div key={comment.id}>
+                {/* Điều kiện hiển thị nút xóa cho người đăng bài hoặc người bình luận */}
+                {(CurrentUserId === postOwnerId ||
+                  CurrentUserId === comment.userId) && (
+                  <button
+                    onClick={() => handleDeleteComment(comment.id)}
+                    style={{
+                      marginBottom: "100px",
+                      borderRadius: "10px",
+                      marginLeft: "auto",
+                      padding: "5px 10px",
+                      backgroundColor: "#ff4d4f",
+                      color: "white",
+                      border: "none",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Delete
+                  </button>
+                )}
+              </div>
             </div>
           );
         })
