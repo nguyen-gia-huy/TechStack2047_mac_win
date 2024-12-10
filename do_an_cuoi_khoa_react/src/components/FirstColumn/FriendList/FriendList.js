@@ -4,6 +4,7 @@ import "./FriendList.css";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { Button, message } from "antd";
+import { Link } from "react-router-dom";
 
 const FriendList = () => {
   const userIdSender = localStorage.getItem("loggedInUserId");
@@ -17,7 +18,9 @@ const FriendList = () => {
     );
     const friendList = await Promise.all(
       userData.friends.map((friendId) =>
-        axios.get(`http://localhost:3000/users/${friendId}`).then((res) => res.data)
+        axios
+          .get(`http://localhost:3000/users/${friendId}`)
+          .then((res) => res.data)
       )
     );
     return friendList;
@@ -31,8 +34,12 @@ const FriendList = () => {
 
   const handleDeleteFriend = async (friendId) => {
     try {
-      const responseSender = await fetch(`http://localhost:3000/users/${userIdSender}`);
-      const responseReceiver = await fetch(`http://localhost:3000/users/${friendId}`);
+      const responseSender = await fetch(
+        `http://localhost:3000/users/${userIdSender}`
+      );
+      const responseReceiver = await fetch(
+        `http://localhost:3000/users/${friendId}`
+      );
       const userDataSender = await responseSender.json();
       const userDataReceiver = await responseReceiver.json();
 
@@ -67,8 +74,6 @@ const FriendList = () => {
     }
   };
 
-
-
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
@@ -86,12 +91,36 @@ const FriendList = () => {
         <div className="friendRequestUnique">
           {data.map((friend) => (
             <div key={friend.id}>
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "15px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  marginBottom: "15px",
+                }}
+              >
                 <div style={{ display: "flex" }}>
-                  <img src={friend.avatar || "default-avatar-url.png"} alt="Avatar" />
-                  <h2>{friend.nickname || "No nickname"}</h2>
+                  <img
+                    style={{ marginLeft: "20px", marginRight: "20px" }}
+                    src={friend.avatar || "default-avatar-url.png"}
+                    alt="Avatar"
+                  />
+                  <Link to={`/profile/${friend.id}`}>
+                    <h4>{friend.nickname || "No nickname"}</h4>
+                  </Link>
                 </div>
-                <Button onClick={() => handleDeleteFriend(friend.id)}>Hủy kết bạn</Button>
+                <Button
+                  style={{
+                    width: "200px",
+                    marginRight: "50px",
+                    backgroundColor: "#ff4d4f",
+                    color: "white",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => handleDeleteFriend(friend.id)}
+                >
+                  Hủy kết bạn
+                </Button>
               </div>
             </div>
           ))}

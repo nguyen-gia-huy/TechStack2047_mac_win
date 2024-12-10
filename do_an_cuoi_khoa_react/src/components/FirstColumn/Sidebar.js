@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Sidebar.css";
+import { FaUser, FaUserFriends, FaUserPlus  } from "react-icons/fa";
 
 const Sidebar = () => {
   // Lấy userId từ localStorage
@@ -11,16 +12,19 @@ const Sidebar = () => {
       <nav>
         {/* Chuyển đường dẫn tới Profile */}
         <Link to={`/profile/${userId}`} className="nav-link">
-          Profile
+        <FaUser />
+        Profile
         </Link>
         
         {/* Các liên kết khác */}
         <Link to="/friends-list" className="nav-link" >
-          Your Friends 
+        <FaUserFriends />
+        Your Friends 
         </Link>
      
         <Link to="/friends-request-list" className="nav-link">
-          Friend Request List
+        <FaUserPlus />
+        Friend Request List
         </Link>
       </nav>
     </div>
