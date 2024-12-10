@@ -50,7 +50,9 @@
         }
       ],
       "OutcomingFriendRequest": [],
-      "IncomingFriendRequest": [],
+      "IncomingFriendRequest": [
+        "75e6"
+      ],
       "friends": [
         "fc7f"
       ]
@@ -116,7 +118,9 @@
       "dateOfBirth": "2024-11-21",
       "IncomingFriendRequest": [],
       "friends": [],
-      "OutcomingFriendRequest": [],
+      "OutcomingFriendRequest": [
+        "907b"
+      ],
       "posts": [
         {
           "id": "1733241597776",

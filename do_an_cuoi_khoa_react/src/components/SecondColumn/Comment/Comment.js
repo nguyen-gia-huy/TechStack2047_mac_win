@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Comment = ({ comments, setComments }) => {
   const [users, setUsers] = useState([]);
@@ -93,7 +94,12 @@ const Comment = ({ comments, setComments }) => {
                         marginRight: "10px",
                       }}
                     >
-                      {user?.nickname || "Unknown User"}
+                      <Link
+                        style={{ textDecoration: "none" }}
+                        to={`/profile/${comment.userId}`}
+                      >
+                        {user?.nickname || "Unknown User"}
+                      </Link>
                     </p>
                     <p
                       style={{

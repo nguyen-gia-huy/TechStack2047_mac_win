@@ -35,7 +35,7 @@ const updateUserPosts = async ({ userId, updatedData }) => {
   });
   if (!response.ok) throw new Error("Failed to update user posts");
   return response.json();
-}
+};
 
 const Profile = () => {
   const queryClient = useQueryClient();
@@ -47,7 +47,12 @@ const Profile = () => {
   const { userId } = useParams();
 
   // Fetch profile data using useQuery
-  const { data: profileData, isLoading, isError, error } = useQuery({
+  const {
+    data: profileData,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
     queryKey: ["profileData", userId],
     queryFn: fetchProfileData,
     onSuccess: (data) => setProfileData(data), // Cập nhật Context khi fetch thành công
@@ -81,7 +86,6 @@ const Profile = () => {
 
     // Gửi mutation
     deletePostMutation.mutate({ userId, updatedData: updatedUserData });
-
   };
 
   // Loading and Error handling
@@ -127,20 +131,17 @@ const Profile = () => {
           </div>
         </div>
         <div>
-
           {CurrentUserId === userId && (
             <div>
               <UpImgModal />
               <UploadBlog />
             </div>
           )}
-          {
-            CurrentUserId !== userId && (
-              <div>
-                <AddFriend />
-              </div>
-            )
-          }
+          {CurrentUserId !== userId && (
+            <div>
+              <AddFriend />
+            </div>
+          )}
         </div>
         <h2>Posts</h2>
         <hr />
@@ -149,7 +150,11 @@ const Profile = () => {
             [...profileData.posts]
               .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
               .map((post) => (
-                <div key={post.id} className="post" style={{ marginTop: "10px" }}>
+                <div
+                  key={post.id}
+                  className="post"
+                  style={{ marginTop: "10px" }}
+                >
                   <div style={{ display: "flex" }}>
                     <img
                       className="post-avatar"
@@ -167,7 +172,17 @@ const Profile = () => {
                   </div>
                   <hr />
                   {/* Hiển thị các bình luận liên quan đến bài viết */}
-                  <div>
+                  <div></div>
+
+                  <Comment
+                    comments={comments.filter(
+                      (comment) => comment.postId === post.id
+                    )}
+                  />
+                  {/* Modal để thêm bình luận */}
+                  <div style={{ display: "flex" }}>
+                    <Like />
+                    <CmtModal postId={post.id} />
                   </div>
                   {CurrentUserId === userId && (
                     <Button
@@ -179,14 +194,6 @@ const Profile = () => {
                       Delete Post
                     </Button>
                   )}
-                  <Comment
-                    comments={comments.filter((comment) => comment.postId === post.id)}
-                  />
-                  {/* Modal để thêm bình luận */}
-                  <div style={{ display: 'flex' }}>
-                    <Like />
-                    <CmtModal postId={post.id} />
-                  </div>
                 </div>
               ))
           ) : (

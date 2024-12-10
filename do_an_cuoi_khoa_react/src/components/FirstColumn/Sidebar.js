@@ -9,24 +9,24 @@ const Sidebar = () => {
 
   return (
     <div className="first-colum">
-      <nav>
+      <ul>
         {/* Chuyển đường dẫn tới Profile */}
-        <Link to={`/profile/${userId}`} className="nav-link">
+        <Link style={{marginTop:'10px'}} to={`/profile/${userId}`} className="nav-link">
         <FaUser />
         Profile
         </Link>
         
         {/* Các liên kết khác */}
-        <Link to="/friends-list" className="nav-link" >
+        <Link style={{marginTop:'10px'}} to="/friends-list" className="nav-link" >
         <FaUserFriends />
         Your Friends 
         </Link>
      
-        <Link to="/friends-request-list" className="nav-link">
+        <Link style={{marginTop:'10px'}} to="/friends-request-list" className="nav-link">
         <FaUserPlus />
         Friend Request List
         </Link>
-      </nav>
+      </ul>
     </div>
   );
 };

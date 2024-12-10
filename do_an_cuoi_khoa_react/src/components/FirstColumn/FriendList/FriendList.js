@@ -5,6 +5,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { Button, message } from "antd";
 import { Link } from "react-router-dom";
+import Sidebar from "../Sidebar";
 
 const FriendList = () => {
   const userIdSender = localStorage.getItem("loggedInUserId");
@@ -85,6 +86,7 @@ const FriendList = () => {
   return (
     <div className="container">
       <Navigation />
+     
       <div className="container-noidung">
         <h1>Friend List</h1>
 
