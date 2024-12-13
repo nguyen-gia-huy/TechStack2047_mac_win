@@ -66,12 +66,13 @@ const Comment = ({ comments, setComments }) => {
             <div
               key={comment.id}
               style={{
+                height: "150px",
                 marginBottom: "10px",
                 display: "flex",
                 alignItems: "center",
                 boxShadow: "0 2px 8px rgba(0, 0, 0, 0.5)",
                 borderRadius: "10px",
-                padding: "10px",
+                padding: "20px",
               }}
             >
               <div style={{ display: "flex" }}>
@@ -87,7 +88,13 @@ const Comment = ({ comments, setComments }) => {
                   }}
                 />
                 <div>
-                  <div style={{ display: "flex", height: "40px" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      height: "30px",
+                      alignItems: "center",
+                    }}
+                  >
                     <p
                       style={{
                         fontWeight: "bold",
@@ -101,16 +108,16 @@ const Comment = ({ comments, setComments }) => {
                         {user?.nickname || "Unknown User"}
                       </Link>
                     </p>
-                    <p
-                      style={{
-                        fontSize: "15px",
-                        color: "gray",
-                      }}
-                    >
-                      {new Date(comment.createdAt).toLocaleString()}
-                    </p>
                   </div>
                   <p>{comment.content}</p>
+                  <span
+                    style={{
+                      fontSize: "15px",
+                      color: "gray",
+                    }}
+                  >
+                    {new Date(comment.createdAt).toLocaleString()}
+                  </span>
                 </div>
               </div>
               <div key={comment.id}>
