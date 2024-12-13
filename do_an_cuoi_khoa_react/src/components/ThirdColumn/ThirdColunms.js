@@ -1,6 +1,7 @@
 import React from "react";
 
 import SearchUser from "./SearchUser/searchUser";
+import UserSug from "./userSuggest/userSug";
 
 const ThirdColunms = () => {
   return (
@@ -9,6 +10,7 @@ const ThirdColunms = () => {
     >
     
       <SearchUser />
+      <UserSug/>
     </div>
   );
 };

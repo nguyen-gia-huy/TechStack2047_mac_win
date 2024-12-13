@@ -1,18 +1,60 @@
-/* Search bar */
-.input-name {
-    padding: 8px 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    outline: none;
-    font-size: 14px;
-    transition: border-color 0.3s;
-  }
-  .search-avatar{
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-  }
-  .input-search-li{
-    width: 700px;
-  
-  }
+
+  /* Bố cục chính */
+div {
+  box-sizing: border-box; /* Đảm bảo padding không phá vỡ layout */
+}
+
+/* Thẻ bao quanh form */
+div[style*="backgroundColor: white"] {
+  width: 100%; /* Để khung không bị quá rộng */
+  max-width: 500px; /* Đặt giới hạn chiều rộng */
+  margin: 0 auto; /* Căn giữa layout */
+}
+
+/* Input và nút */
+input.input-name {
+  width: calc(100% - 100px); /* Đảm bảo kích thước input không chiếm toàn bộ */
+}
+
+button.input-name {
+  width: 90px; /* Đặt chiều rộng cố định cho nút */
+}
+
+/* Kết quả tìm kiếm */
+div.input-search-li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 10px;
+  background-color: #fff; /* Màu nền nổi bật hơn */
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+div.input-search-li:hover {
+  background-color: #f1f1f1; /* Màu hover sáng hơn */
+}
+
+img.search-avatar {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* Văn bản trong danh sách */
+div.input-search-li span {
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Tránh tràn layout */
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+

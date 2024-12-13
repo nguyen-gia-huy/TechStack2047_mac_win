@@ -43,9 +43,8 @@ const Login = () => {
   };
 
   return (
-
-     <div className="login-form" >
-     <h1 className="logo-title">YourPage</h1>
+    <div className="login-form">
+      <h1 className="logo-title">YourPage</h1>
       <Form
         onFinish={handleSubmit}
         layout="vertical"
@@ -90,8 +89,7 @@ const Login = () => {
           </Link>
         </Form.Item>
       </Form>
-     </div>
-
+    </div>
   );
 };
 

@@ -66,73 +66,90 @@ const Comment = ({ comments, setComments }) => {
             <div
               key={comment.id}
               style={{
-                height: "150px",
-                marginBottom: "10px",
                 display: "flex",
-                alignItems: "center",
-                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.5)",
+                flexDirection: "row",
+                alignItems: "flex-start",
+                padding: "10px",
                 borderRadius: "10px",
-                padding: "20px",
+                backgroundColor: "#f0f2f5",
+                marginBottom: "10px",
+                boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
               }}
             >
-              <div style={{ display: "flex" }}>
-                <img
-                  className="avatar"
-                  src={user?.avatar || "default-avatar-url"}
-                  alt="User Avatar"
+              {/* Avatar người dùng */}
+              <img
+                src={user?.avatar || "default-avatar-url"}
+                alt="User Avatar"
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  borderRadius: "50%",
+                  marginRight: "10px",
+                }}
+              />
+
+              {/* Nội dung bình luận */}
+              <div style={{ flex: 1 }}>
+                <div
                   style={{
-                    width: "50px",
-                    height: "50px",
-                    borderRadius: "50%",
-                    marginRight: "10px",
+                    display: "flex",
+                    flexDirection: "column",
+                    backgroundColor: "#fff",
+                    padding: "10px",
+                    borderRadius: "8px",
+                    boxShadow: "0 1px 2px rgba(0, 0, 0, 0.15)",
                   }}
-                />
-                <div>
+                >
+                  {/* Tên người dùng và thời gian bình luận */}
                   <div
                     style={{
                       display: "flex",
-                      height: "30px",
+                      justifyContent: "space-between",
                       alignItems: "center",
+                      marginBottom: "5px",
                     }}
                   >
-                    <p
+                    <Link
+                      to={`/profile/${comment.userId}`}
                       style={{
                         fontWeight: "bold",
+                        fontSize: "14px",
+                        color: "#050505",
+                        textDecoration: "none",
                         marginRight: "10px",
                       }}
                     >
-                      <Link
-                        style={{ textDecoration: "none" }}
-                        to={`/profile/${comment.userId}`}
-                      >
-                        {user?.nickname || "Unknown User"}
-                      </Link>
-                    </p>
+                      {user?.nickname || "Unknown User"}
+                    </Link>
+                    <span style={{ fontSize: "12px", color: "gray" }}>
+                      {new Date(comment.createdAt).toLocaleString()}
+                    </span>
                   </div>
-                  <p>{comment.content}</p>
-                  <span
+
+                  {/* Nội dung bình luận */}
+                  <p
                     style={{
-                      fontSize: "15px",
-                      color: "gray",
+                      fontSize: "14px",
+                      color: "#050505",
+                      margin: 0,
+                      lineHeight: "1.4",
                     }}
                   >
-                    {new Date(comment.createdAt).toLocaleString()}
-                  </span>
+                    {comment.content}
+                  </p>
                 </div>
-              </div>
-              <div key={comment.id}>
-                {/* Điều kiện hiển thị nút xóa cho người đăng bài hoặc người bình luận */}
+
+                {/* Nút xóa bình luận */}
                 {(CurrentUserId === postOwnerId ||
                   CurrentUserId === comment.userId) && (
                   <button
                     onClick={() => handleDeleteComment(comment.id)}
                     style={{
-                      marginBottom: "100px",
-                      borderRadius: "10px",
-                      marginLeft: "auto",
+                      marginTop: "5px",
                       padding: "5px 10px",
-                      backgroundColor: "#ff4d4f",
-                      color: "white",
+                      backgroundColor: "transparent",
+                      color: "#1877f2",
+                      fontSize: "12px",
                       border: "none",
                       cursor: "pointer",
                     }}
