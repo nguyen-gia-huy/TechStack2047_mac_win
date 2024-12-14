@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { AiOutlineHome } from "react-icons/ai";
 
 import "./Navigation.css";
 import { Link, Outlet, useNavigate } from "react-router-dom";
@@ -21,21 +22,33 @@ const Navigation = () => {
   };
 
   return (
-    <>    <div className="container-nav" >
-      <div className="right-top-nav" style={{ justifyContent: 'flex-start', display: 'flex' }}>
-        <h1>Your page</h1>
-        <Link to="/defaultPage">
-          <FontAwesomeIcon
-            style={{ marginLeft: 15, marginTop: 5, fontSize: 40 }}
-            icon={faHouse}
-          />
-        </Link>
-      </div>
+    <>
+      {" "}
+      <div className="container-nav">
+        <div
+          className="right-top-nav"
+          style={{ justifyContent: "flex-start", display: "flex" }}
+        >
+          <h1>Your page</h1>
+          <Link to="/defaultPage">
+            <AiOutlineHome
+              style={{
+                marginLeft: 15,
+                marginTop: 5,
+                fontSize: 50,
+                color: "white",
+                backgroundColor: "#87E64A",
+                padding: "10px",
+                borderRadius: "50%",
+              }}
+            />
+          </Link>
+        </div>
 
-      <div className="left-top-nav"  >
-        <button onClick={handleLogout}>Logout</button>
-        {/* Thay thế thẻ span bằng thẻ img */}
-        {/* <img
+        <div className="left-top-nav">
+          <button onClick={handleLogout}>Logout</button>
+          {/* Thay thế thẻ span bằng thẻ img */}
+          {/* <img
           onClick={handleLogoClick}
           style={{
             cursor: "pointer",
@@ -46,9 +59,10 @@ const Navigation = () => {
           src={profileData?.avatar || "default-avatar-url"} // Lấy avatar từ profileData
           alt="Avatar"
         /> */}
+        </div>
       </div>
-    </div>
-      <Outlet /></>
+      <Outlet />
+    </>
   );
 };
 
