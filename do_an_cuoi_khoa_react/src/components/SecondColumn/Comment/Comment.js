@@ -143,12 +143,15 @@ const Comment = ({ comments, setComments }) => {
                 {(CurrentUserId === postOwnerId ||
                   CurrentUserId === comment.userId) && (
                   <button
+                  
                     onClick={() => handleDeleteComment(comment.id)}
                     style={{
                       marginTop: "5px",
                       padding: "5px 10px",
-                      backgroundColor: "transparent",
-                      color: "#1877f2",
+                     
+                      color: "white",
+                      borderRadius:'10px',
+                      backgroundColor:'red',
                       fontSize: "12px",
                       border: "none",
                       cursor: "pointer",
