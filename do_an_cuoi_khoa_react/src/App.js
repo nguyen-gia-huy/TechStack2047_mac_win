@@ -15,6 +15,7 @@ import DefaultPage from "./components/DefaultLayout/DefaultPage";
 import FriendList from "./components/FirstColumn/FriendList/FriendList";
 import FriendRequestList from "./components/FirstColumn/FriendRequest/FriendRequestList";
 import Setting from "./components/FirstColumn/Setting/Setting";
+import ChangePassword from "./components/FirstColumn/Setting/ChangePass/ChangePassword";
 
 // Component bảo vệ để kiểm tra trạng thái đăng nhập
 const ProtectedRoute = ({ children }) => {
@@ -50,14 +51,17 @@ const App = () => {
           <Route path="/friends-list" element={<FriendList />} />
           <Route path="/friends-request-list" element={<FriendRequestList />} />
           <Route
-            path="/setting/:userId"
+            path="/setting"
             element={
-              <ProtectedRoute>
-                <Setting />
-              </ProtectedRoute>
+              <Setting />
             }
           />
-
+           <Route
+            path="/setting/changepassword"
+            element={
+              <ChangePassword />
+            }
+          />
           <Route
             path="/profile/:userId"
             element={

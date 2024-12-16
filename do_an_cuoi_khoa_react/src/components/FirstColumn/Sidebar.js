@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Sidebar.css";
 import { FaUser, FaUserFriends, FaUserPlus } from "react-icons/fa";
+import { IoSettingsOutline } from "react-icons/io5";
 
 const Sidebar = () => {
   // Lấy userId từ localStorage
@@ -101,7 +102,15 @@ const Sidebar = () => {
         >
           Account
         </span>
-        <Link to="/setting/:userId">Setting</Link>
+        <Link to="/setting" > <IoSettingsOutline style={{
+              backgroundColor: "#F0156B",
+              color: "white",
+              width: "45px",
+              height: "45px",
+              padding: "10px",
+              marginRight: "10px",
+              borderRadius: "50%",
+            }}/>Settings</Link>
       </ul>
     </div>
   );
