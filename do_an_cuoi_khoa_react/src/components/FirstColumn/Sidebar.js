@@ -9,12 +9,13 @@ const Sidebar = () => {
   const userId = localStorage.getItem("loggedInUserId");
 
   return (
-    <div className="first-colum">
+    <div className="first-colum" >
       <ul
         style={{
           backgroundColor: "white",
           padding: "20px",
           borderRadius: "10px",
+        marginBottom:'15px'
         }}
       >
         <span
@@ -98,6 +99,7 @@ const Sidebar = () => {
             display: "flex",
             fontSize: "20px",
             color: "gray",
+            marginBottom:'15px'
           }}
         >
           Account

@@ -52,7 +52,8 @@ const SearchUser = () => {
         margin: "auto",
       }}
     >
-      <h5 style={{ fontSize: "18px", color: "#333", marginBottom: "15px" }}>
+      <h5 style={{  fontSize: "20px",
+            color: "gray", color: "#333", marginBottom: "15px" }}>
         Search User
       </h5>
       <div style={{ display: "flex", alignItems: "center" }}>

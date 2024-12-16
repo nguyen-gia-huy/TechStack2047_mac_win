@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 20px; /* Khoảng cách hai bên */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng đổ */
+  box-shadow: 0 6px 4px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng đổ */
   z-index: 1000; /* Đặt lên trên các thành phần khác */
   color: #fff; /* Màu chữ */
   font-family: Arial, sans-serif;

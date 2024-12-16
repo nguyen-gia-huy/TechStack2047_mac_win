@@ -12,11 +12,35 @@ const Setting = () => {
     <div className='body-setting'>
       <Navigation />
       <div className="setting-container">
-        <h3>Settings</h3>
-        <ul style={{display:'flex', flexDirection:'column'}}>
-          <Link to="/setting/changepassword"> <MdOutlinePassword />Change Password</Link>
-          <Link><GrDocumentUpdate />Update Profile</Link>
-          <Link><CgMoreR />Other Settings</Link>
+        <h3 >Settings</h3>
+        <ul style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+          <Link to="/setting/changepassword"> <MdOutlinePassword style={{
+            backgroundColor: "#F43659",
+            color: "white",
+            width: "45px",
+            height: "45px",
+            padding: "10px",
+            marginRight: "10px",
+            borderRadius: "50%",
+          }} />Change Password</Link>
+          <Link><GrDocumentUpdate style={{
+            backgroundColor: "#F2BF4B",
+            color: "white",
+            width: "45px",
+            height: "45px",
+            padding: "10px",
+            marginRight: "10px",
+            borderRadius: "50%",
+          }} />Update Profile</Link>
+          <Link><CgMoreR style={{
+            backgroundColor: "#0369D9",
+            color: "white",
+            width: "45px",
+            height: "45px",
+            padding: "10px",
+            marginRight: "10px",
+            borderRadius: "50%",
+          }} />Other Settings</Link>
         </ul>
       </div>
     </div>
