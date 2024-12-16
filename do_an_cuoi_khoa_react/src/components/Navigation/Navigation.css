@@ -1,12 +1,12 @@
 /* Navigation container */
 .container-nav {
-  border: 2px solid #262626;
+  border: 2px solid #FFFFFF;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 60px; /* Chiều cao header */
-  background-color: #262626; /* Màu nền chính */
+  height: 80px; /* Chiều cao header */
+  background-color: #FFFFFF; /* Màu nền chính */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -26,9 +26,9 @@
 
 /* Header title */
 .right-top-nav h1 {
-  font-size: 1.5rem;
+  font-size: 2rem;
   margin: 0;
-  color: #fff;
+  color: #0055FE;
   font-weight: bold;
 }
 

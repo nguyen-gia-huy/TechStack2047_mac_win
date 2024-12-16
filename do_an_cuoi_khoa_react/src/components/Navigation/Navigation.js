@@ -35,9 +35,9 @@ const Navigation = () => {
               style={{
                 marginLeft: 15,
                 marginTop: 5,
-                fontSize: 50,
-                color: "white",
-                backgroundColor: "#87E64A",
+                fontSize: 60,
+                color: "#1F73FC",
+                backgroundColor: "#D2E3FF",
                 padding: "10px",
                 borderRadius: "50%",
               }}

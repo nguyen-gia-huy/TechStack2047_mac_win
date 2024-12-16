@@ -2,15 +2,16 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
-    margin-top: 60px; /* Để header cố định */
-    gap: 10px; /* Khoảng cách giữa các cột */
+    margin-top: 70px; /* Để header cố định */
+    gap: 20px; /* Khoảng cách giữa các cột */
+    background-color: #FBFCFE;
   }
   
   /* Sidebar */
   .sidebar {
   position: sticky; /* Giữ vị trí cố định khi cuộn */
-  top: 60px; /* Khoảng cách từ trên xuống (để không đè header) */
-  width: 300px;
+  top: 90px; /* Khoảng cách từ trên xuống (để không đè header) */
+  width: 350px;
   height: calc(100vh - 60px); /* Chiều cao của màn hình trừ header */
   overflow-y: auto; /* Thêm cuộn riêng nếu nội dung quá dài */
   background-color: #E6E8EA;
@@ -24,8 +25,8 @@
   /* Third Column */
   .third-column {
     position: sticky;
-    top: 60px;
-    width: 300px;
+    top: 90px;
+    width: 350px;
     height: calc(100vh - 60px);
     overflow-y: auto;
     background-color: #E6E8EA;

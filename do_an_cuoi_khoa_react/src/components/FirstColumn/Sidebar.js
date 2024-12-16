@@ -27,7 +27,7 @@ const Sidebar = () => {
         </span>
         {/* Chuyển đường dẫn tới Profile */}
         <Link
-          style={{ marginTop: "20px", color: "gray",  }}
+          style={{ marginTop: "20px", color: "gray" }}
           to={`/profile/${userId}`}
           className="nav-link"
         >
@@ -83,6 +83,25 @@ const Sidebar = () => {
           />
           Friend Request List
         </Link>
+      </ul>
+      <ul
+        style={{
+          backgroundColor: "white",
+          padding: "20px",
+          borderRadius: "10px",
+        }}
+
+      >
+         <span
+          style={{
+            display: "flex",
+            fontSize: "20px",
+            color: "gray",
+          }}
+        >
+          Account
+        </span>
+        <Link to="/setting/:userId">Setting</Link>
       </ul>
     </div>
   );

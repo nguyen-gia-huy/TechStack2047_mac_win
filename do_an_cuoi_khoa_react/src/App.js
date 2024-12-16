@@ -14,6 +14,7 @@ import { ProfileProvider } from "./ProfileContext";
 import DefaultPage from "./components/DefaultLayout/DefaultPage";
 import FriendList from "./components/FirstColumn/FriendList/FriendList";
 import FriendRequestList from "./components/FirstColumn/FriendRequest/FriendRequestList";
+import Setting from "./components/FirstColumn/Setting/Setting";
 
 // Component bảo vệ để kiểm tra trạng thái đăng nhập
 const ProtectedRoute = ({ children }) => {
@@ -32,7 +33,7 @@ const App = () => {
     // Đảm bảo chỉ có một BrowserRouter tại đây
     <>
       {" "}
-      <ProfileProvider >
+      <ProfileProvider>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -43,12 +44,20 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <DefaultPage />
-              
               </ProtectedRoute>
             }
           />
-           <Route path="/friends-list" element={<FriendList/>}/>
-           <Route path="/friends-request-list"element={<FriendRequestList/>}/>
+          <Route path="/friends-list" element={<FriendList />} />
+          <Route path="/friends-request-list" element={<FriendRequestList />} />
+          <Route
+            path="/setting/:userId"
+            element={
+              <ProtectedRoute>
+                <Setting />
+              </ProtectedRoute>
+            }
+          />
+
           <Route
             path="/profile/:userId"
             element={
