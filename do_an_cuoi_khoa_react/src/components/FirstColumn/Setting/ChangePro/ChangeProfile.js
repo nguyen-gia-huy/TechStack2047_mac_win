@@ -11,20 +11,19 @@ const ChangeProfile = () => {
 
   const handleChangeName = async () => {
     if (!newName) {
-        message.error("Plese fill in your new name");
+      message.error("Plese fill in your new name");
       return;
     }
-    
   };
   const handleChangeEmail = async () => {
     if (!newEmail) {
-        message.error("Plese fill in your new email");
+      message.error("Plese fill in your new email");
       return;
     }
   };
   const handleChangeDateOfBirth = async () => {
     if (!newDateOfBirth) {
-        message.error("Plese fill in your new date of birth");
+      message.error("Plese fill in your new date of birth");
       return;
     }
   };
