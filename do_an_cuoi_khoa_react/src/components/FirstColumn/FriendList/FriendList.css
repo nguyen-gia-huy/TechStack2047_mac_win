@@ -4,4 +4,15 @@
     border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     justify-self: center;
     width: 1000px;
+    padding: 20px;
+}
+.friendRequestUnique{
+    border-radius: 15px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+  
+}
+.friendRequestUnique img{
+    border-radius: 10px;
+
 }

@@ -102,7 +102,7 @@ const FriendList = () => {
               >
                 <div style={{ display: "flex" }}>
                   <img
-                    style={{ marginLeft: "20px", marginRight: "20px" }}
+                    style={{ marginRight: "20px", width:'120px' }}
                     src={friend.avatar || "default-avatar-url.png"}
                     alt="Avatar"
                   />
@@ -113,7 +113,7 @@ const FriendList = () => {
                 <Button
                   style={{
                     width: "200px",
-                    marginRight: "50px",
+                    marginRight: "10px",
                     backgroundColor: "#ff4d4f",
                     color: "white",
                     border: "none",
