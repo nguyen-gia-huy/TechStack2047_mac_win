@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: column; /* Sắp xếp nội dung theo chiều dọc */
     margin-top: 100px;
-    height: 350px;
+    height: 500px;
     padding: 20px; /* Thêm khoảng cách bên trong container */
     width: 1000px;
   }

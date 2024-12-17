@@ -120,9 +120,9 @@
       "id": "75e6",
       "email": "ronald07@gmail.com",
       "password": "aaa",
-      "nickname": "Ronaldo",
+      "nickname": "ronaldo",
       "gender": "male",
-      "dateOfBirth": "2024-11-21",
+      "dateOfBirth": "2024-12-31",
       "IncomingFriendRequest": [
         "dc44",
         "ab6b"
