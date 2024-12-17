@@ -16,6 +16,7 @@ import FriendList from "./components/FirstColumn/FriendList/FriendList";
 import FriendRequestList from "./components/FirstColumn/FriendRequest/FriendRequestList";
 import Setting from "./components/FirstColumn/Setting/Setting";
 import ChangePassword from "./components/FirstColumn/Setting/ChangePass/ChangePassword";
+import ChangeProfile from "./components/FirstColumn/Setting/ChangePro/ChangeProfile";
 
 // Component bảo vệ để kiểm tra trạng thái đăng nhập
 const ProtectedRoute = ({ children }) => {
@@ -62,6 +63,7 @@ const App = () => {
               <ChangePassword />
             }
           />
+          <Route path="setting/changeprofile" element={<ChangeProfile/>}/>
           <Route
             path="/profile/:userId"
             element={

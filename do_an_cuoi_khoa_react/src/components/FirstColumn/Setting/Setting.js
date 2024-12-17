@@ -14,7 +14,7 @@ const Setting = () => {
       <div className="setting-container">
         <h3 >Settings</h3>
         <ul style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-          <Link to="/setting/changepassword"> <MdOutlinePassword style={{
+          <Link to="changepassword"> <MdOutlinePassword style={{
             backgroundColor: "#F43659",
             color: "white",
             width: "45px",
@@ -23,7 +23,7 @@ const Setting = () => {
             marginRight: "10px",
             borderRadius: "50%",
           }} />Change Password</Link>
-          <Link><GrDocumentUpdate style={{
+          <Link to={'changeprofile'}><GrDocumentUpdate style={{
             backgroundColor: "#F2BF4B",
             color: "white",
             width: "45px",
