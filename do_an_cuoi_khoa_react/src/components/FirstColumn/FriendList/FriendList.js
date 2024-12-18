@@ -5,15 +5,11 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { Button, message } from "antd";
 import { Link } from "react-router-dom";
-import Sidebar from "../Sidebar";
 
 const FriendList = () => {
   const userIdSender = localStorage.getItem("loggedInUserId");
 
   const fetchFriendList = async () => {
-    if (!userIdSender) {
-      return []; // Trả về danh sách bạn bè rỗng nếu user chưa đăng nhập
-    }
     const { data: userData } = await axios.get(
       `http://localhost:3000/users/${userIdSender}`
     );
@@ -30,7 +26,7 @@ const FriendList = () => {
   const { data, error, isLoading } = useQuery({
     queryKey: ["friends", userIdSender],
     queryFn: fetchFriendList,
-    enabled: !!userIdSender, // Ngăn chặn việc fetch nếu userIdSender là null
+    enabled: !!userIdSender, // Ngăn chặn fetch nếu userIdSender là null
   });
 
   const handleDeleteFriend = async (friendId) => {
@@ -86,47 +82,52 @@ const FriendList = () => {
   return (
     <div className="container">
       <Navigation />
-     
       <div className="container-noidung">
-        <h1>Friend List</h1>
+        <h2>Friend List</h2>
 
-        <div className="friendRequestUnique">
-          {data.map((friend) => (
-            <div key={friend.id}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginBottom: "15px",
-                }}
-              >
-                <div style={{ display: "flex" }}>
-                  <img
-                    style={{ marginRight: "20px", width:'120px' }}
-                    src={friend.avatar || "default-avatar-url.png"}
-                    alt="Avatar"
-                  />
-                  <Link to={`/profile/${friend.id}`}>
-                    <h4>{friend.nickname || "No nickname"}</h4>
-                  </Link>
-                </div>
-                <Button
+        {/* Kiểm tra danh sách bạn bè */}
+        {data.length > 0 ? (
+          <div className="friendRequestUnique">
+            {data.map((friend) => (
+              <div key={friend.id}>
+                <div
                   style={{
-                    width: "200px",
-                    marginRight: "10px",
-                    backgroundColor: "#ff4d4f",
-                    color: "white",
-                    border: "none",
-                    cursor: "pointer",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginBottom: "15px",
                   }}
-                  onClick={() => handleDeleteFriend(friend.id)}
                 >
-                  Hủy kết bạn
-                </Button>
+                  <div style={{ display: "flex" }}>
+                    <img
+                      style={{ marginRight: "20px", width: "120px" }}
+                      src={friend.avatar || "default-avatar-url.png"}
+                      alt="Avatar"
+                    />
+                    <Link to={`/profile/${friend.id}`}>
+                      <h4>{friend.nickname || "No nickname"}</h4>
+                    </Link>
+                  </div>
+                  <Button
+                    style={{
+                      width: "200px",
+                      marginRight: "10px",
+                      backgroundColor: "#ff4d4f",
+                      color: "white",
+                      border: "none",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => handleDeleteFriend(friend.id)}
+                  >
+                    Hủy kết bạn
+                  </Button>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          // Hiển thị thông báo khi danh sách bạn bè trống
+          <span>Let's find people you know</span>
+        )}
       </div>
     </div>
   );

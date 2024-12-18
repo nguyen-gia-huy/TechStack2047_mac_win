@@ -26,7 +26,7 @@ const EditPost = ({ post, onUpdatePost, isEditable }) => {
       <div className="post-a">
       
         {isEditable && (
-          <Button onClick={showModal} style={{ marginTop: "10px" }}>
+          <Button onClick={showModal} style={{ marginTop: "10px", backgroundColor:'#5B626A', color:'white' }}>
             Edit
           </Button>
         )}

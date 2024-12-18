@@ -43,7 +43,7 @@ const Post = () => {
   const { setProfileData } = useContext(ProfileContext);
 
   const userId = localStorage.getItem("loggedInUserId");
-
+  
   const { data: profileData } = useQuery({
     queryKey: ["profileData", userId],
     queryFn: fetchProfileData,

@@ -6,12 +6,13 @@ import UpImgModal from "./UploadImage/UpImgModal";
 import { ProfileContext } from "../../ProfileContext";
 import UploadBlog from "./UploadBlog/UploadBlog";
 import { Button, message } from "antd";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import AddFriend from "./Addfriend/AddFriend";
 import Like from "../SecondColumn/Like/Like";
 import CmtModal from "../SecondColumn/commentModal/CmtsModal";
 import Comment from "../SecondColumn/Comment/Comment";
 import EditPost from "./EditPost/EditPost";
+import axios from "axios";
 
 // API Fetch Profile Data
 const fetchProfileData = async ({ queryKey }) => {
@@ -43,7 +44,19 @@ const Profile = () => {
   const { setProfileData, setCommentProfile } = useContext(ProfileContext);
 
   const CurrentUserId = localStorage.getItem("loggedInUserId");
-
+  const fetchFriendList = async () => {
+    const { data: userData } = await axios.get(
+      `http://localhost:3000/users/${CurrentUserId}`
+    );
+    const friendList = await Promise.all(
+      userData.friends.map((friendId) =>
+        axios
+          .get(`http://localhost:3000/users/${friendId}`)
+          .then((res) => res.data)
+      )
+    );
+    return friendList;
+  };
   // Lấy userId từ URL qua useParams
   const { userId } = useParams();
 
@@ -63,7 +76,11 @@ const Profile = () => {
     queryKey: ["comments"],
     queryFn: fetchComments,
   });
-
+  const { data } = useQuery({
+    queryKey: ["friends", CurrentUserId],
+    queryFn: fetchFriendList,
+    enabled: !!CurrentUserId, // Ngăn chặn việc fetch nếu userIdSender là null
+  });
   // Mutation for deleting a post
   const deletePostMutation = useMutation({
     mutationFn: updateUserPosts,
@@ -143,10 +160,7 @@ const Profile = () => {
               <strong>Date of Birth:</strong> {profileData.dateOfBirth}
             </p>
           </div>
-          <div className="friends-section">
-            <h2>Friends</h2>
-            {/* Render danh sách bạn bè nếu có */}
-          </div>
+       
         </div>
         <div>
           {CurrentUserId === userId && (
