@@ -173,27 +173,41 @@ const Profile = () => {
                   className="post"
                   style={{ marginTop: "10px" }}
                 >
-                  <div style={{ display: "flex", justifyContent:'space-between' }}>
-                   <div style={{ display: "flex" }}>
-                   <img
-                      className="post-avatar"
-                      src={profileData.avatar || "default-avatar-url"}
-                      alt=""
-                    />
-                    <p>
-                      <h4>{profileData.nickname}</h4>
-                      <span>{new Date(post.createdAt).toLocaleString()}</span>
-                    </p>
-                   </div>
-                    <EditPost
-                    style={{}}
-                    key={post.id}
-                    post={post}
-                    isEditable={CurrentUserId === userId} // Chỉ cho phép chỉnh sửa nếu là bài viết của người dùng
-                    onUpdatePost={handleUpdatePost}
-                  />
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <div style={{ display: "flex" }}>
+                      <img
+                        className="post-avatar"
+                        src={profileData.avatar || "default-avatar-url"}
+                        alt=""
+                      />
+                      <p>
+                        <h4>{profileData.nickname}</h4>
+                        <span>{new Date(post.createdAt).toLocaleString()}</span>
+                      </p>
+                    </div>
+                    <div>
+                      <EditPost
+                        style={{}}
+                        key={post.id}
+                        post={post}
+                        isEditable={CurrentUserId === userId} // Chỉ cho phép chỉnh sửa nếu là bài viết của người dùng
+                        onUpdatePost={handleUpdatePost}
+                      />
+                      {CurrentUserId === userId && (
+                        <Button
+                          type="primary"
+                          danger
+                          onClick={() => handleDeletePost(post.id)}
+                          style={{ marginTop: "10px" }}
+                        >
+                          Delete Post
+                        </Button>
+                      )}
+                    </div>
                   </div>
-                 
+
                   <p>{post.content}</p>
                   <div style={{ display: "flex", justifyContent: "center" }}>
                     {post.image && <img src={post.image} alt="Post" />}
@@ -212,16 +226,6 @@ const Profile = () => {
                     <Like />
                     <CmtModal postId={post.id} />
                   </div>
-                  {CurrentUserId === userId && (
-                    <Button
-                      type="primary"
-                      danger
-                      onClick={() => handleDeletePost(post.id)}
-                      style={{ marginTop: "10px" }}
-                    >
-                      Delete Post
-                    </Button>
-                  )}
                 </div>
               ))
           ) : (
