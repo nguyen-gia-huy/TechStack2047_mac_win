@@ -66,7 +66,7 @@ const AddFriend = () => {
             IncomingFriendRequest: receiver.IncomingFriendRequest.filter((id) => id !== userIdSender),
           }),
         ]);
-        message.success("Lời mời kết bạn đã bị hủy!");
+        message.success("Friend Request Cancelled!");
       } else {
         // Gửi lời mời kết bạn
         await Promise.all([
@@ -79,13 +79,13 @@ const AddFriend = () => {
             IncomingFriendRequest: [...(receiver.IncomingFriendRequest || []), userIdSender],
           }),
         ]);
-        message.success("Gửi lời mời kết bạn thành công!");
+        message.success("Friend Request Success!");
       }
 
       setFriendRequestSent(!friendRequestSent);
     } catch (error) {
-      console.error("Lỗi khi gửi hoặc hủy lời mời:", error);
-      message.error("Lỗi khi xử lý lời mời kết bạn!");
+      console.error("Error sendding friend request:", error);
+      message.error("Error sendding friend request!");
     } finally {
       setLoading(false);
     }
@@ -113,11 +113,11 @@ const AddFriend = () => {
           friends: receiver.friends.filter((id) => id !== userIdSender),
         }),
       ]);
-      message.success("Đã hủy bạn bè!");
+      message.success("Unfriend succes!");
       setIsFriend(false);
     } catch (error) {
-      console.error("Lỗi khi hủy bạn bè:", error);
-      message.error("Lỗi khi xử lý hủy bạn bè!");
+      console.error("Error Unfriend:", error);
+      message.error("Error Unfriend!");
     } finally {
       setLoading(false);
     }
@@ -130,7 +130,7 @@ const AddFriend = () => {
       style={{ width: "300px" }}
       type="primary"
     >
-      {isFriend ? "Hủy kết bạn" : friendRequestSent ? "Hủy lời mời kết bạn" : "Kết bạn"}
+      {isFriend ? "Unfriend" : friendRequestSent ? "Send friend request" : "Send friend request"}
     </Button>
   );
 };

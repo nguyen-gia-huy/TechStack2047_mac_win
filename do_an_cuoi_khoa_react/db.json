@@ -66,7 +66,9 @@
       "posts": [],
       "IncomingFriendRequest": [],
       "OutcomingFriendRequest": [
-        "dc44",
+        "dc44"
+      ],
+      "friends": [
         "75e6"
       ]
     },
@@ -118,10 +120,11 @@
       "IncomingFriendRequest": [
         "ab6b"
       ],
-      "OutcomingFriendRequest": [
+      "OutcomingFriendRequest": [],
+      "friends": [
+        "75e6",
         "75e6"
-      ],
-      "friends": []
+      ]
     },
     {
       "id": "75e6",
@@ -130,12 +133,11 @@
       "nickname": "ronaldo",
       "gender": "male",
       "dateOfBirth": "2024-12-31",
-      "IncomingFriendRequest": [
-        "dc44",
-        "ab6b"
-      ],
+      "IncomingFriendRequest": [],
       "friends": [
-        "907b"
+        "907b",
+        "ab6b",
+        "dc44"
       ],
       "OutcomingFriendRequest": [],
       "posts": [

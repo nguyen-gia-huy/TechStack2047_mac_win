@@ -87,7 +87,7 @@ const FriendList = () => {
 
         {/* Kiểm tra danh sách bạn bè */}
         {data.length > 0 ? (
-          <div className="friendRequestUnique">
+          <div className="friendListUnique">
             {data.map((friend) => (
               <div key={friend.id}>
                 <div
@@ -97,29 +97,31 @@ const FriendList = () => {
                     marginBottom: "15px",
                   }}
                 >
-                  <div style={{ display: "flex" }}>
-                    <img
-                      style={{ marginRight: "20px", width: "120px" }}
-                      src={friend.avatar || "default-avatar-url.png"}
-                      alt="Avatar"
-                    />
-                    <Link to={`/profile/${friend.id}`}>
-                      <h4>{friend.nickname || "No nickname"}</h4>
-                    </Link>
+                  <div className="user-friend" style={{ display: "flex" }}>
+                    <div className="user-friend-unique">
+                      <img
+                        style={{ marginRight: "20px", width: "120px" }}
+                        src={friend.avatar || "default-avatar-url.png"}
+                        alt="Avatar"
+                      />
+                      <Link to={`/profile/${friend.id}`}>
+                        <h4>{friend.nickname || "No nickname"}</h4>
+                      </Link>
+                    </div>
+                    <Button
+                      style={{
+                        width: "200px",
+                        marginRight: "10px",
+                        backgroundColor: "#ff4d4f",
+                        color: "white",
+                        border: "none",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => handleDeleteFriend(friend.id)}
+                    >
+                      Hủy kết bạn
+                    </Button>
                   </div>
-                  <Button
-                    style={{
-                      width: "200px",
-                      marginRight: "10px",
-                      backgroundColor: "#ff4d4f",
-                      color: "white",
-                      border: "none",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => handleDeleteFriend(friend.id)}
-                  >
-                    Hủy kết bạn
-                  </Button>
                 </div>
               </div>
             ))}

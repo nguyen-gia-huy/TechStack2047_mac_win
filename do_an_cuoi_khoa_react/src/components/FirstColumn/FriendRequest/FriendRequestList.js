@@ -173,13 +173,14 @@ const FriendRequestList = () => {
                   display: "flex",
                   justifyContent: "space-between",
                   marginBottom: "15px",
+                  
                 }}
               >
-                <div style={{ display: "flex" }}>
+                <div style={{ display: "flex", justifyContent:'space-between', width:'200px' }}>
                   <img src={friend.avatar}></img>
                   <h2>{friend.nickname}</h2>
                 </div>
-                <h3>{friend.id}</h3>
+            
                 <div>
                   <Button
                     loading={loading}
