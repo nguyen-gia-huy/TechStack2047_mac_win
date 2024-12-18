@@ -54,12 +54,12 @@ const UpImgModal = () => {
         Upload Picture
       </Button>
       <Modal
-        title="Basic Modal"
+        title="Upload image"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <UploadImage type="cover" onImageUpload={handleCoverUpload} />
+        <UploadImage type="cover" onImageUpload={handleCoverUpload}  />
         <UploadImage type="avatar" onImageUpload={handleAvatarUpload} />
       </Modal>
     </>
