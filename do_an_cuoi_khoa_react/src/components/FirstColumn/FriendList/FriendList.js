@@ -119,7 +119,7 @@ const FriendList = () => {
                       }}
                       onClick={() => handleDeleteFriend(friend.id)}
                     >
-                      Hủy kết bạn
+                      Unfriend
                     </Button>
                   </div>
                 </div>

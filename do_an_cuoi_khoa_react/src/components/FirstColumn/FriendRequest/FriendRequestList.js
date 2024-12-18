@@ -173,16 +173,18 @@ const FriendRequestList = () => {
                   display: "flex",
                   justifyContent: "space-between",
                   marginBottom: "15px",
-                  
+                 boxShadow:'0 4px 8px rgba(0, 0, 0, 0.5)'
+                 , padding:'20px'
                 }}
               >
-                <div style={{ display: "flex", justifyContent:'space-between', width:'200px' }}>
+                <div style={{ display: "flex", justifyContent:'space-between', width:'300px' }}>
                   <img src={friend.avatar}></img>
-                  <h2>{friend.nickname}</h2>
+                  <h3>{friend.nickname}</h3>
                 </div>
             
-                <div>
+                <div style={{padding:'10px'}}>
                   <Button
+                  style={{marginBottom:'10px'}}
                     loading={loading}
                     type="primary"
                     onClick={() => handleAcceptFriendRequest(friend.id)}

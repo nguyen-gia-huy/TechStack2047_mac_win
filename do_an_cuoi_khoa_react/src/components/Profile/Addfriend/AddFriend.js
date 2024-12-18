@@ -130,7 +130,7 @@ const AddFriend = () => {
       style={{ width: "300px" }}
       type="primary"
     >
-      {isFriend ? "Unfriend" : friendRequestSent ? "Send friend request" : "Send friend request"}
+      {isFriend ? "Unfriend" : friendRequestSent ? "Cancel Friend Request" : "Send Friend Request"}
     </Button>
   );
 };
