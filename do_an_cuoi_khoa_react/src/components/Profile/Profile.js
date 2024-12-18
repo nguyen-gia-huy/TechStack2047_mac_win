@@ -1,4 +1,4 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import "./Profile.css";
 import Navigation from "../Navigation/Navigation";
@@ -11,6 +11,7 @@ import AddFriend from "./Addfriend/AddFriend";
 import Like from "../SecondColumn/Like/Like";
 import CmtModal from "../SecondColumn/commentModal/CmtsModal";
 import Comment from "../SecondColumn/Comment/Comment";
+import EditPost from "./EditPost/EditPost";
 
 // API Fetch Profile Data
 const fetchProfileData = async ({ queryKey }) => {
@@ -87,6 +88,23 @@ const Profile = () => {
     // Gửi mutation
     deletePostMutation.mutate({ userId, updatedData: updatedUserData });
   };
+  const handleUpdatePost = (postId, newContent) => {
+    if (!profileData) return;
+
+    // Tìm và cập nhật bài viết cần thay đổi nội dung
+    const updatedPosts = profileData.posts.map((post) =>
+      post.id === postId ? { ...post, content: newContent } : post
+    );
+
+    // Cập nhật dữ liệu người dùng với danh sách bài viết mới
+    const updatedUserData = { ...profileData, posts: updatedPosts };
+
+    // Gửi mutation để cập nhật server
+    deletePostMutation.mutate({
+      userId,
+      updatedData: updatedUserData,
+    });
+  };
 
   // Loading and Error handling
   if (isLoading) return <div>Loading...</div>;
@@ -155,8 +173,9 @@ const Profile = () => {
                   className="post"
                   style={{ marginTop: "10px" }}
                 >
-                  <div style={{ display: "flex" }}>
-                    <img
+                  <div style={{ display: "flex", justifyContent:'space-between' }}>
+                   <div style={{ display: "flex" }}>
+                   <img
                       className="post-avatar"
                       src={profileData.avatar || "default-avatar-url"}
                       alt=""
@@ -165,7 +184,16 @@ const Profile = () => {
                       <h4>{profileData.nickname}</h4>
                       <span>{new Date(post.createdAt).toLocaleString()}</span>
                     </p>
+                   </div>
+                    <EditPost
+                    style={{}}
+                    key={post.id}
+                    post={post}
+                    isEditable={CurrentUserId === userId} // Chỉ cho phép chỉnh sửa nếu là bài viết của người dùng
+                    onUpdatePost={handleUpdatePost}
+                  />
                   </div>
+                 
                   <p>{post.content}</p>
                   <div style={{ display: "flex", justifyContent: "center" }}>
                     {post.image && <img src={post.image} alt="Post" />}

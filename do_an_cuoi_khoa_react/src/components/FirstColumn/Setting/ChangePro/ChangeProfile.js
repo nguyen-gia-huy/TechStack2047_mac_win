@@ -80,6 +80,7 @@ const ChangeProfile = () => {
         <h3>Change Profile</h3>
         Name
         <Input
+          style={{ marginBottom: "15px" }}
           value={newName}
           onChange={(e) => setNewName(e.target.value)}
           placeholder="Enter new name"
@@ -89,6 +90,7 @@ const ChangeProfile = () => {
         </Button>
         Email
         <Input
+          style={{ marginBottom: "15px" }}
           value={newEmail}
           onChange={(e) => setNewEmail(e.target.value)}
           placeholder="Enter new email"
@@ -98,9 +100,10 @@ const ChangeProfile = () => {
         </Button>
         Date of Birth
         <DatePicker
+          style={{ marginBottom: "15px" }}
           value={newDateOfBirth} // Bind value từ state
           onChange={(date) => setNewDateOfBirth(date)} // Cập nhật state khi chọn ngày
-          placeholder="Select your date of birth"
+          placeholder="Select your new date of birth"
         />
         <Button type="primary" onClick={handleChangeDateOfBirth}>
           Update Date Of Birth
