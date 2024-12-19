@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "antd";
-
+import './Like.css'
 const Like = ({ postId }) => {
   const userId = localStorage.getItem("loggedInUserId"); // ID người dùng đang đăng nhập
   const [likeCount, setLikeCount] = useState(0);
@@ -58,7 +58,7 @@ const Like = ({ postId }) => {
   };
 
   return (
-    <div style={{ display: "flex", width: "200px" }} className="like-container">
+    <div style={{ display: "flex", width: "220px", justifyContent:'space-around', alignItems:'center' }} className="like-container">
       <span>{likeCount} Likes</span>
       <button
         style={{

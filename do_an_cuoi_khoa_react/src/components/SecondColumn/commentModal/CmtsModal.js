@@ -27,7 +27,7 @@ const CmtModal = ({ postId }) => {
     return (
         <form style={{ display: "flex" , marginLeft:'10px'}}>
             <input
-                style={{  width:'550px', marginRight: "20px", borderRadius:'8px' }}
+                style={{  width:'530px', marginRight: "20px", borderRadius:'8px' }}
                 placeholder="What do you think about this post?"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}

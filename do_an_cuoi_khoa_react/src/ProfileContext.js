@@ -19,8 +19,13 @@ export const ProfileProvider = ({ children }) => {
     content:null,
     createAt:null,
   })
+  const [like, SetLike]= useState({
+    id:null,
+    postId: null,
+    userId:null,
+  })
   return (
-    <ProfileContext.Provider value={{ profileData, setProfileData,commentsProfile, setCommentProfile }}>
+    <ProfileContext.Provider value={{ profileData, setProfileData,commentsProfile, setCommentProfile, like, SetLike }}>
       {children}
     </ProfileContext.Provider>
   );
