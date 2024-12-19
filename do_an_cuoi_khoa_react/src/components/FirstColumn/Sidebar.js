@@ -2,20 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Sidebar.css";
 import { FaUser, FaUserFriends, FaUserPlus } from "react-icons/fa";
-import { IoSettingsOutline } from "react-icons/io5";
+import { IoNotificationsOutline, IoSettingsOutline } from "react-icons/io5";
 
 const Sidebar = () => {
   // Lấy userId từ localStorage
   const userId = localStorage.getItem("loggedInUserId");
 
   return (
-    <div className="first-colum" >
+    <div className="first-colum">
       <ul
         style={{
           backgroundColor: "white",
           padding: "20px",
           borderRadius: "10px",
-        marginBottom:'15px'
+          marginBottom: "15px",
         }}
       >
         <span
@@ -92,19 +92,40 @@ const Sidebar = () => {
           padding: "20px",
           borderRadius: "10px",
         }}
-
       >
-         <span
+        <span
           style={{
             display: "flex",
             fontSize: "20px",
             color: "gray",
-            marginBottom:'15px'
+            marginBottom: "15px",
           }}
         >
           Account
         </span>
-        <Link to="/setting" > <IoSettingsOutline style={{
+        <Link
+          style={{ marginTop: "20px", color: "gray" }}
+          to="/notification"
+          className="nav-link"
+        >
+          <IoNotificationsOutline
+            style={{
+              backgroundColor: "#F2BF4B",
+              color: "white",
+              width: "45px",
+              height: "45px",
+              padding: "10px",
+              marginRight: "10px",
+              borderRadius: "50%",
+              marginBottom: "15px",
+            }}
+          />
+         Notification
+        </Link>
+        <Link to="/setting">
+          {" "}
+          <IoSettingsOutline
+            style={{
               backgroundColor: "#F0156B",
               color: "white",
               width: "45px",
@@ -112,7 +133,10 @@ const Sidebar = () => {
               padding: "10px",
               marginRight: "10px",
               borderRadius: "50%",
-            }}/>Settings</Link>
+            }}
+          />
+          Settings
+        </Link>
       </ul>
     </div>
   );

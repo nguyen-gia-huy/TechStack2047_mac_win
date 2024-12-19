@@ -43,7 +43,7 @@ const Post = () => {
   const { setProfileData } = useContext(ProfileContext);
 
   const userId = localStorage.getItem("loggedInUserId");
-  
+
   const { data: profileData } = useQuery({
     queryKey: ["profileData", userId],
     queryFn: fetchProfileData,
@@ -117,7 +117,7 @@ const Post = () => {
               />
               {/* Modal để thêm bình luận */}
               <div style={{ display: "flex" }}>
-                <Like />
+                <Like postId={post.id} />
                 <CmtModal postId={post.id} />
               </div>
             </div>

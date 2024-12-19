@@ -17,6 +17,7 @@ import FriendRequestList from "./components/FirstColumn/FriendRequest/FriendRequ
 import Setting from "./components/FirstColumn/Setting/Setting";
 import ChangePassword from "./components/FirstColumn/Setting/ChangePass/ChangePassword";
 import ChangeProfile from "./components/FirstColumn/Setting/ChangePro/ChangeProfile";
+import Notification from "./components/FirstColumn/Notification/Notification";
 
 // Component bảo vệ để kiểm tra trạng thái đăng nhập
 const ProtectedRoute = ({ children }) => {
@@ -57,6 +58,7 @@ const App = () => {
               <Setting />
             }
           />
+          <Route path="/notification" element={<Notification/>} />
            <Route
             path="/setting/changepassword"
             element={
