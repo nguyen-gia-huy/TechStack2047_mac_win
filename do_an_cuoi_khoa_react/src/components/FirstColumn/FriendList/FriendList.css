@@ -7,10 +7,7 @@
     padding: 20px;
 }
 
-.friendRequestUnique img{
-    border-radius: 10px;
 
-}
 .user-friend{
     border-radius: 15px; 
     box-shadow: 0  4px 8px rgba(0, 0, 0, 0.5);
@@ -21,9 +18,11 @@
 }
 .user-friend-unique{
     display: flex;
-    
+    padding: 10px;
 }
 .user-friend-unique img{
    width: 120px;
    height: 120px;
+   border-radius: 10px;
+   border: 1px solid gray;
 }

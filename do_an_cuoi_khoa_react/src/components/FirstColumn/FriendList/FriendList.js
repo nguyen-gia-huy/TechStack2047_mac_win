@@ -105,7 +105,7 @@ const FriendList = () => {
                         alt="Avatar"
                       />
                       <Link to={`/profile/${friend.id}`}>
-                        <h4>{friend.nickname || "No nickname"}</h4>
+                        <span style={{fontSize:'25px'}}>{friend.nickname || "No nickname"}</span>
                       </Link>
                     </div>
                     <Button
@@ -116,6 +116,7 @@ const FriendList = () => {
                         color: "white",
                         border: "none",
                         cursor: "pointer",
+                        marginTop:'20px'
                       }}
                       onClick={() => handleDeleteFriend(friend.id)}
                     >

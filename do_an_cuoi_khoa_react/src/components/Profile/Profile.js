@@ -26,6 +26,11 @@ const fetchComments = async () => {
   if (!response.ok) throw new Error("Failed to fetch comments");
   return response.json();
 };
+const fetchLikes = async () => {
+  const response = await fetch("http://localhost:3000/likes");
+  if (!response.ok) throw new Error("Failed to fetch likes");
+  return response.json();
+};
 // API Update User Data
 const updateUserPosts = async ({ userId, updatedData }) => {
   const response = await fetch(`http://localhost:3000/users/${userId}`, {
@@ -75,6 +80,10 @@ const Profile = () => {
   const { data: comments, isLoading: loadingComments } = useQuery({
     queryKey: ["comments"],
     queryFn: fetchComments,
+  });
+  const { data: likes, isLoading: loadingLikes } = useQuery({
+    queryKey: ["likes"],
+    queryFn: fetchLikes,
   });
   const { data } = useQuery({
     queryKey: ["friends", CurrentUserId],
@@ -160,7 +169,6 @@ const Profile = () => {
               <strong>Date of Birth:</strong> {profileData.dateOfBirth}
             </p>
           </div>
-       
         </div>
         <div>
           {CurrentUserId === userId && (
@@ -237,7 +245,10 @@ const Profile = () => {
                   />
                   {/* Modal để thêm bình luận */}
                   <div style={{ display: "flex" }}>
-                    <Like />
+                    <Like
+                      likes={likes.filter((like) => like.postId === post.id)}
+                      postId={post.id}
+                    />
                     <CmtModal postId={post.id} />
                   </div>
                 </div>
