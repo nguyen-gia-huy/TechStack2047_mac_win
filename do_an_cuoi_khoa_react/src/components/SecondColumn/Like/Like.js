@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Button } from "antd";
 
 const Like = ({ postId }) => {
   const userId = localStorage.getItem("loggedInUserId"); // ID người dùng đang đăng nhập
@@ -11,7 +12,9 @@ const Like = ({ postId }) => {
     const fetchLikes = async () => {
       try {
         const response = await axios.get(`http://localhost:3000/likes`);
-        const likesForPost = response.data.filter((like) => like.postId === postId);
+        const likesForPost = response.data.filter(
+          (like) => like.postId === postId
+        );
         setLikeCount(likesForPost.length);
 
         // Kiểm tra xem người dùng hiện tại đã like bài viết chưa
@@ -55,13 +58,21 @@ const Like = ({ postId }) => {
   };
 
   return (
-    <div className="like-container">
-       <span>{likeCount} Likes</span>
-       <br/>
-      <button  onClick={handleLike} className={isLiked ? "liked" : "not-liked"}>
+    <div style={{ display: "flex", width: "200px" }} className="like-container">
+      <span>{likeCount} Likes</span>
+      <button
+        style={{
+          border: "none",
+          borderRadius: "8px",
+          backgroundColor: "#1890FF",
+          color: "white",
+          padding: "0px 15px",
+        }}
+        onClick={handleLike}
+        className={isLiked ? "liked" : "not-liked"}
+      >
         {isLiked ? "Unlike" : "Like"}
       </button>
-     
     </div>
   );
 };

@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Comment from "./Comment/Comment";
 import CmtModal from "./commentModal/CmtsModal";
 import Like from "./Like/Like";
+import LikeShow from "./Like/LikeShow";
 
 // API Fetch Profile Data
 const fetchProfileData = async ({ queryKey }) => {
@@ -103,6 +104,7 @@ const Post = () => {
               <div style={{ display: "flex", justifyContent: "center" }}>
                 {post.image && <img src={post.image} alt="Post" />}
               </div>
+
               <hr />
 
               <Comment
@@ -116,7 +118,7 @@ const Post = () => {
                 }}
               />
               {/* Modal để thêm bình luận */}
-              <div style={{ display: "flex" }}>
+              <div style={{height:'50px', display: "flex", justifyContent:'space-between' }}>
                 <Like postId={post.id} />
                 <CmtModal postId={post.id} />
               </div>
