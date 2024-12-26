@@ -155,7 +155,6 @@ const Profile = () => {
             alt=""
           />
           <h1>{profileData.nickname}</h1>
-          
         </div>
         <hr />
         <div className="profile-info">
@@ -252,9 +251,11 @@ const Profile = () => {
                   {/* Modal để thêm bình luận */}
                   <div style={{ display: "flex" }}>
                     <Like
-                      likes={likes.filter(
-                        (like) => like.postId === post.id || null
-                      )}
+                      likes={
+                        Array.isArray(likes)
+                          ? likes.filter((like) => like.postId === post.id)
+                          : []
+                      }
                       postId={post.id}
                     />
                     <CmtModal postId={post.id} />
