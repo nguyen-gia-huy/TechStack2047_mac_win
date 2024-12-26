@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -13,20 +14,19 @@ const UserSug = () => {
       setError(null);
 
       try {
-        const response = await fetch(`http://localhost:3000/users`);
+        const { data: users } = await axios.get(`http://localhost:3000/users`);
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch users");
-        }
-
-        const users = await response.json();
-
-        // Lọc danh sách người dùng (không bao gồm người dùng hiện tại)
-        const filteredUsers = users.filter((user) => user.id !== userId );
+        // Lọc danh sách người dùng: không phải bạn bè và không phải chính mình
+        const filteredUsers = users.filter(
+          (user) =>
+            user.id !== userId &&
+            Array.isArray(user.friends) &&
+            !user.friends.includes(userId)
+        );
 
         setResults(filteredUsers);
       } catch (err) {
-        setError(err.message);
+        setError(err.response?.data || "Failed to fetch users");
       } finally {
         setIsLoading(false);
       }
