@@ -174,10 +174,11 @@ const FriendRequestList = () => {
                   justifyContent: "space-between",
                   marginBottom: "15px",
                  boxShadow:'0 4px 8px rgba(0, 0, 0, 0.5)'
-                 , padding:'20px'
+                 , padding:'20px',
+                 borderRadius:'10px'
                 }}
               >
-                <div style={{ display: "flex", justifyContent:'space-between', width:'300px' }}>
+                <div style={{ display: "flex", justifyContent:'space-between', width:'200px' }}>
                   <img src={friend.avatar}></img>
                   <h3>{friend.nickname}</h3>
                 </div>

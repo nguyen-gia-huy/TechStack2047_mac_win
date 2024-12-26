@@ -108,7 +108,9 @@ const Profile = () => {
     if (!profileData) return;
 
     // Lọc bỏ bài viết bị xóa
-    const updatedPosts = profileData.posts.filter((post) => post.id !== postId);
+    const updatedPosts = profileData.posts.filter(
+      (post) => post.id !== postId || null
+    );
     const updatedUserData = { ...profileData, posts: updatedPosts };
 
     // Gửi mutation
@@ -239,14 +241,20 @@ const Profile = () => {
                   <div></div>
 
                   <Comment
-                    comments={comments.filter(
-                      (comment) => comment.postId === post.id
-                    )}
+                    comments={
+                      Array.isArray(comments)
+                        ? comments.filter(
+                            (comment) => comment.postId === post.id
+                          )
+                        : []
+                    }
                   />
                   {/* Modal để thêm bình luận */}
                   <div style={{ display: "flex" }}>
                     <Like
-                      likes={likes.filter((like) => like.postId === post.id)}
+                      likes={likes.filter(
+                        (like) => like.postId === post.id || null
+                      )}
                       postId={post.id}
                     />
                     <CmtModal postId={post.id} />

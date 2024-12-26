@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Sidebar.css";
-import { FaUser, FaUserFriends, FaUserPlus } from "react-icons/fa";
+import { FaUser, FaUserFriends, FaUserPlus, FaStore } from "react-icons/fa";
 import { IoNotificationsOutline, IoSettingsOutline } from "react-icons/io5";
-
+import { MdGroups3, MdOndemandVideo } from "react-icons/md";
 const Sidebar = () => {
   // Lấy userId từ localStorage
   const userId = localStorage.getItem("loggedInUserId");
@@ -85,6 +85,60 @@ const Sidebar = () => {
           />
           Friend Request List
         </Link>
+        <Link
+          style={{ marginTop: "20px", color: "gray" }}
+          to=""
+          className="nav-link"
+        >
+          <MdGroups3
+            style={{
+              backgroundColor: "#6A6D64",
+              color: "white",
+              width: "45px",
+              height: "45px",
+              padding: "10px",
+              marginRight: "10px",
+              borderRadius: "50%",
+            }}
+          />
+          Groups
+        </Link>
+        <Link
+          style={{ marginTop: "20px", color: "gray" }}
+          to=""
+          className="nav-link"
+        >
+          <FaStore
+            style={{
+              backgroundColor: "#44BA5E",
+              color: "white",
+              width: "45px",
+              height: "45px",
+              padding: "10px",
+              marginRight: "10px",
+              borderRadius: "50%",
+            }}
+          />
+          Market
+        </Link>
+        <Link
+          style={{ marginTop: "20px", color: "gray" }}
+          to=""
+          className="nav-link"
+        >
+          <MdOndemandVideo
+            style={{
+              backgroundColor: "#C53718",
+              color: "white",
+              width: "45px",
+              height: "45px",
+              padding: "10px",
+              marginRight: "10px",
+              borderRadius: "50%",
+            }}
+          />
+          Videos
+        </Link>
       </ul>
       <ul
         style={{
@@ -103,7 +157,7 @@ const Sidebar = () => {
         >
           Account
         </span>
-        <Link
+        {/* <Link
           style={{ marginTop: "20px", color: "gray" }}
           to="/notification"
           className="nav-link"
@@ -121,7 +175,7 @@ const Sidebar = () => {
             }}
           />
          Notification
-        </Link>
+        </Link> */}
         <Link to="/setting">
           {" "}
           <IoSettingsOutline

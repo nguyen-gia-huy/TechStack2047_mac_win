@@ -127,10 +127,7 @@
       "OutcomingFriendRequest": [
         "907b"
       ],
-      "friends": [
-        "75e6",
-        "75e6"
-      ]
+      "friends": []
     },
     {
       "id": "75e6",
@@ -141,8 +138,7 @@
       "dateOfBirth": "2024-12-31",
       "IncomingFriendRequest": [],
       "friends": [
-        "ab6b",
-        "dc44"
+        "ab6b"
       ],
       "OutcomingFriendRequest": [
         "907b"
