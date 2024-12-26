@@ -155,7 +155,7 @@ const Profile = () => {
             alt=""
           />
           <h1>{profileData.nickname}</h1>
-          <p>User ID: {userId}</p>
+          
         </div>
         <hr />
         <div className="profile-info">
@@ -232,7 +232,7 @@ const Profile = () => {
                     </div>
                   </div>
 
-                  <p>{post.content}</p>
+                  <span>{post.content}</span>
                   <div style={{ display: "flex", justifyContent: "center" }}>
                     {post.image && <img src={post.image} alt="Post" />}
                   </div>

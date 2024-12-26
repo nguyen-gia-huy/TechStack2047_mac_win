@@ -100,7 +100,7 @@ const Post = () => {
                   <span>{new Date(post.createdAt).toLocaleString()}</span>
                 </p>
               </div>
-              <p>{post.content}</p>
+              <span>{post.content}</span>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 {post.image && <img src={post.image} alt="Post" />}
               </div>

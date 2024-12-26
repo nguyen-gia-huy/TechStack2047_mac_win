@@ -22,7 +22,7 @@ const UserSug = () => {
         const users = await response.json();
 
         // Lọc danh sách người dùng (không bao gồm người dùng hiện tại)
-        const filteredUsers = users.filter((user) => user.id !== userId);
+        const filteredUsers = users.filter((user) => user.id !== userId );
 
         setResults(filteredUsers);
       } catch (err) {
