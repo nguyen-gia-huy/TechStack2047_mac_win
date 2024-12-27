@@ -185,25 +185,29 @@ const AddFriend = () => {
 
   return (
     <Button
-      onClick={
-        isFriend
-          ? handleDeleteFriend
-          : incomingFriendRequest
-          ? handleAcceptFriendRequest
-          : handleSendFriendRequest
-      }
-      loading={loading}
-      style={{ width: "300px" }}
-      type="primary"
-    >
-      {isFriend
-        ? "Unfriend"
+    onClick={
+      isFriend
+        ? handleDeleteFriend
         : incomingFriendRequest
-        ? "Accept Friend Request"
-        : friendRequestSent
-        ? "Cancel Friend Request"
-        : "Send Friend Request"}
-    </Button>
+        ? handleAcceptFriendRequest
+        : handleSendFriendRequest
+    }
+    loading={loading}
+    style={{
+      width: "300px",
+      backgroundColor: isFriend ? "red" : undefined, // Thay đổi màu nếu là bạn bè
+    }}
+    type="primary"
+  >
+    {isFriend
+      ? "Unfriend"
+      : incomingFriendRequest
+      ? "Accept Friend Request"
+      : friendRequestSent
+      ? "Cancel Friend Request"
+      : "Send Friend Request"}
+  </Button>
+  
   );
 };
 
