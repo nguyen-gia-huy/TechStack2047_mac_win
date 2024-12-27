@@ -74,7 +74,7 @@ const Post = () => {
   }
   return (
     <div className="containerPostDefault">
-      <h2>All Posts</h2>
+      
 
       <div>
         {isLoading ? (
