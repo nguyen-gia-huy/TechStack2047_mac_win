@@ -4,6 +4,7 @@ import Navigation from "../../Navigation/Navigation";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { Button, message } from "antd";
+import { Link } from "react-router-dom";
 
 const FriendRequestList = () => {
   const [loading, setLoading] = useState(false);
@@ -173,19 +174,30 @@ const FriendRequestList = () => {
                   display: "flex",
                   justifyContent: "space-between",
                   marginBottom: "15px",
-                 boxShadow:'0 4px 8px rgba(0, 0, 0, 0.5)'
-                 , padding:'20px',
-                 borderRadius:'10px'
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)",
+                  padding: "20px",
+                  borderRadius: "10px",
                 }}
               >
-                <div style={{ display: "flex", justifyContent:'space-between', width:'300px' }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    width: "300px",
+                  }}
+                >
                   <img src={friend.avatar}></img>
-                  <span style={{fontSize:'25px'}}>{friend.nickname}</span>
+                  <Link
+                    to={`/profile/${friend.id}`}
+                    style={{ fontSize: "25px" }}
+                  >
+                    {friend.nickname}
+                  </Link>
                 </div>
-            
-                <div style={{padding:'10px'}}>
+
+                <div style={{ padding: "10px" }}>
                   <Button
-                  style={{marginBottom:'10px'}}
+                    style={{ marginBottom: "10px" }}
                     loading={loading}
                     type="primary"
                     onClick={() => handleAcceptFriendRequest(friend.id)}
