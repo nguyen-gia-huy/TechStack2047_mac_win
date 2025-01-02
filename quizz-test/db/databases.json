@@ -48,6 +48,12 @@
       "email": "user6@gmail.com",
       "username": "user6",
       "password": "12345678"
+    },
+    {
+      "id": "d575",
+      "email": "nguyenhuy3112005@gmail.com",
+      "username": "nguyenhuy3112005@gmail.com",
+      "password": "3112005"
     }
   ],
   "exams": [

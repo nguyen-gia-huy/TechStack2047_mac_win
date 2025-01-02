@@ -45,7 +45,7 @@ const App = () => {
 					<Route path='list-exams/:id' element={<DetailExam />} />
 					<Route path='contact' element={<Contact />} />
 					<Route path='transcript' element={<Transcript />} />
-					<Route path='profile' element={<Profile />} />
+					<Route path='profile/:id' element={<Profile />} />
 					<Route path='change-password' element={<ChangePassword />} />
 				</Route>
 				<Route path='/admin' element={<Admin />}>

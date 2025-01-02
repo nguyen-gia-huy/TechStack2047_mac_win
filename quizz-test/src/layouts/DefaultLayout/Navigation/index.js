@@ -127,7 +127,7 @@ const FormRegister = ({ formRegister }) => {
 
 const Navigation = () => {
 	const [api, contextHolder] = notification.useNotification();
-
+	const userId = localStorage.getItem("loggedUserId");
 	const { userCurrent, onChangeUserCurrent } = useContext(AuthContext);
 
 	const [isShowModal, setIsShowModal] = useState(false);
@@ -136,7 +136,7 @@ const Navigation = () => {
 	const items = [
 		{
 			key: '1',
-			label: <Link to='/profile'>Thông tin</Link>,
+			label: <Link to={`/profile/${userId}`}>Thông tin</Link>,
 		},
 		{
 			key: '2',
@@ -263,7 +263,7 @@ const Navigation = () => {
 					onChangeUserCurrent(user);
 
 					localStorage.setItem('user', JSON.stringify(user));
-
+					localStorage.setItem("loggedUserId", user.id);
 					return;
 				}
 			}
