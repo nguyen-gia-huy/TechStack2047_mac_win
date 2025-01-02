@@ -16,6 +16,7 @@ import ManageFeedback from "./pages/Admin/ManageFeedback";
 import AuthContext from "./contexts/AuthContext";
 import { useState } from "react";
 import { ProfileProvider } from "./contexts/ProfileContex";
+import ChangeInfo from "./pages/ChangeInfo";
 
 const App = () => {
   const [userCurrent, setUserCurrent] = useState(() => {
@@ -48,6 +49,7 @@ const App = () => {
           <Route path="transcript" element={<Transcript />} />
           <Route path="profile/:id" element={<Profile />} />
           <Route path="change-password" element={<ChangePassword />} />
+		  <Route path="change-info" element={<ChangeInfo/>} />
         </Route>
         <Route path="/admin" element={<Admin />}>
           <Route path="" element={<Dashboard />} />
@@ -57,6 +59,9 @@ const App = () => {
           <Route path="users" element={<ManageUsers />} />
           <Route path="feedback" element={<ManageFeedback />} />
         </Route>
+		
+		<Route path="*" element={<h1>Not Found</h1>} />
+
       </Routes>
     </AuthContext.Provider>
   );

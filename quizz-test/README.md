@@ -24,8 +24,8 @@
 			+Quản lý người dùng /pages/Admin/ManageUsers => route: '/admin/users'
 		Feedback
 			+Quản lý feedback /pages/Admin/ManageFeedback => route: '/admin/feedback'
-		
-	
+
+
 -features:
 	+Đăng nhập/ Đăng ký
 	+Phân quyền
@@ -38,4 +38,14 @@
 	+Thi thử
 	+Bảng điểm
 	+Liên hệ (user gửi email feedback cho admin)
+
+---Phân quyền user và admin, user không vào được trang quản trị
+-Bảng xếp hạng (vd: đề thi được thi nhiều nhất, môn học nhiều đề thi nhất..)
+-Bình luận đề thi
+-Hoàn thiện các chức năng còn thiếu trong trang quản trị
+-Đăng nhập bằng tài khoản google, facebook
+-Tìm kiếm đề thi
+-Tạo môn thi (trang quản trị)
+-Hoàn thiện phần thay đổi mật khẩu, chỉnh sửa thông tin cá nhân
+-Hoàn thiện chức năng feedback, gửi mail
 ```

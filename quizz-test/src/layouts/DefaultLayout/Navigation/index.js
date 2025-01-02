@@ -142,15 +142,20 @@ const Navigation = () => {
 			key: '2',
 			label: <Link to='/profile'>Đổi mật khẩu</Link>,
 		},
+		// {
+		// 	key: '3',
+		// 	label: <Link to='/change-info'>Thay đổi thông tin</Link>,
+		// },
 		{
-			key: '3',
+			key: '4',
 			label: <div onClick={() => onChangeUserCurrent(null)}>Đăng xuất</div>,
 		},
+		
 		{
 			type: 'divider',
 		},
 		userCurrent?.role === 'admin' && {
-			key: '4',
+			key: '5',
 			label: <Link to='/admin'>Quản trị</Link>,
 		},
 	];
