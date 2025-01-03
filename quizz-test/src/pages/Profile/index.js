@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button, Input, message } from "antd";
+import { Button, Input, message, Select } from "antd";
 import axios from "axios";
 import React, { useState } from "react";
 
@@ -99,6 +99,14 @@ const Profile = () => {
               value={newEmail || data.email}
               onChange={(e) => setNewEmail(e.target.value)}
             />
+          </div>
+          <div className="col-12 p-1 justify-content-start d-flex">
+            <label className="col-3 col-form-label p-1">
+              <strong>Giới tính:</strong>
+            </label>
+            <Select
+             style={{ width: "80%" }}
+            ></Select>
           </div>
           <div className="col-12 p-1 justify-content-start d-flex">
             <Button type="primary" onClick={handleSubmit}>
