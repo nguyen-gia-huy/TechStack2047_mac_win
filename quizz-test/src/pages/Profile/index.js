@@ -174,6 +174,16 @@ const Profile = () => {
 
   return (
     <div className="col-md-10 col-lg-8 pb-2 text-left bg-white">
+      <div
+        className="col-12 p-1"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <h2>Thông Tin Cá Nhân</h2>
+      </div>
       {isLoading && <p>Loading...</p>}
       {isError && <p>Error: {error.message}</p>}
       {data && (
@@ -185,6 +195,7 @@ const Profile = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              marginBottom: "15px",
             }}
           >
             <label className="col-3 col-form-label p-1">Họ và tên:</label>
@@ -203,6 +214,7 @@ const Profile = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              marginBottom: "15px",
             }}
           >
             <label className="col-3 col-form-label p-1">Email:</label>
@@ -221,6 +233,7 @@ const Profile = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              marginBottom: "15px",
             }}
           >
             <label className="col-3 col-form-label p-1">Giới tính:</label>
@@ -241,6 +254,7 @@ const Profile = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              marginBottom: "15px",
             }}
           >
             <label className="col-3 col-form-label p-1">Ngày sinh:</label>
@@ -257,6 +271,7 @@ const Profile = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              marginBottom: "15px",
             }}
           >
             <label className="col-3 col-form-label p-1">Phân Quyền:</label>
@@ -275,6 +290,7 @@ const Profile = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              marginBottom: "15px",
             }}
           >
             <label className="col-3 col-form-label p-1">Address:</label>
@@ -286,7 +302,14 @@ const Profile = () => {
               onChange={(e) => setNewAddress(e.target.value)}
             />
           </div>
-          <div className="col-12 p-1 justify-content-start d-flex">
+          <div
+            className="col-12 p-1 justify-content-start d-flex"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <Button type="primary" onClick={handleSubmit}>
               Cập nhật thông tin
             </Button>
