@@ -131,11 +131,17 @@ const Navigation = ({ user }) => {
   const [listUser, setListUser] = useState([]);
   const [api, contextHolder] = notification.useNotification();
   const { isAuthenticated, login, logout, userCurrent } = useAuth();
-  const userID = localStorage.getItem("loggedInUserId");
+  console.log(userCurrent?.id);
+  const userid = localStorage.getItem("userCurrent");
+
   const items = [
     {
       key: "1",
-      label: <Link to={`/profile`}>Thông tin</Link>,
+      label: (
+        <Link to={userCurrent?.id ? `/profile/${userCurrent.id}` : `/profile`}>
+          Thông tin
+        </Link>
+      ),
     },
     {
       key: "2",
@@ -185,7 +191,7 @@ const Navigation = ({ user }) => {
         });
 
         login(userLogin);
-      
+
         setIsModalOpen(false);
       } else {
         api.error({

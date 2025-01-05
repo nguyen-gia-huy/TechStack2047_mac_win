@@ -42,18 +42,15 @@ export const AuthProvider = ({ children }) => {
   const login = (user) => {
     setUserCurrent(user);
     setIsAuthenticated(true);
-    setUserID(user.id); // Lưu userID khi đăng nhập
-	console.log(user);
-	
-	
+    console.log(user);
+
     localStorage.setItem("user", JSON.stringify(user));
   };
 
   const logout = () => {
     setUserCurrent(null);
     setIsAuthenticated(false);
-    setUserID(null); // Xóa userID khi đăng xuất
-	
+    
     localStorage.removeItem("user");
   };
 

@@ -14,17 +14,20 @@ import ManageFeedback from './pages/Admin/ManageFeedback';
 import DefaultLayout from './layouts/DefaultLayout';
 import Dashboard from './pages/Admin/Dashboard';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const PrivateRoute = ({ children }) => {
 	const { isAuthenticated } = useAuth();
 
 	return isAuthenticated ? children : <Navigate to='/' />;
 };
+const queryClient = new QueryClient();
 
 const App = () => {
 	return (
 		<div>
 			<AuthProvider>
+				<QueryClientProvider client={queryClient}>
 				<Routes>
 					<Route path='/' element={<DefaultLayout />}>
 						<Route path='' element={<Home />} />
@@ -40,7 +43,7 @@ const App = () => {
 							}
 						/>
 						<Route
-							path='profile'
+							path='profile/:id'
 							element={
 								<PrivateRoute>
 									<Profile />
@@ -65,6 +68,7 @@ const App = () => {
 						<Route path='feedback' element={<ManageFeedback />} />
 					</Route>
 				</Routes>
+				</QueryClientProvider>
 			</AuthProvider>
 		</div>
 	);
