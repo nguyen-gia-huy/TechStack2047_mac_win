@@ -1,6 +1,6 @@
-import { EyeOutlined } from '@ant-design/icons';
-import { Button, Space, Table, Tag, Tooltip } from 'antd';
 import React from 'react';
+import { Button, Space, Table, Tag, Tooltip } from 'antd';
+import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 
 const ManageUsers = () => {
 	const columns = [

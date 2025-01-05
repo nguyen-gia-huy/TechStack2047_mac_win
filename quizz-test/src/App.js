@@ -1,70 +1,73 @@
-import { Route, Routes } from "react-router-dom";
-import DefaultLayout from "./layouts/DefaultLayout";
-import Home from "./pages/Home";
-import ListExams from "./pages/ListExams";
-import Contact from "./pages/Contact";
-import DetailExam from "./pages/DetailExam";
-import Transcript from "./pages/Transcript";
-import Profile from "./pages/Profile";
-import ChangePassword from "./pages/ChangePassword";
-import Admin from "./pages/Admin";
-import Dashboard from "./pages/Admin/Dashboard";
-import ManageExams from "./pages/Admin/ManageExams";
-import CreateExam from "./pages/Admin/ManageExams/CreateExam";
-import ManageUsers from "./pages/Admin/ManageUsers";
-import ManageFeedback from "./pages/Admin/ManageFeedback";
-import AuthContext from "./contexts/AuthContext";
-import { useState } from "react";
-import { ProfileProvider } from "./contexts/ProfileContex";
-import ChangeInfo from "./pages/ChangeInfo";
+import { Navigate, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import ListExams from './pages/ListExams';
+import Contact from './pages/Contact';
+import DetailExam from './pages/DetailExam';
+import Transcript from './pages/Transcript';
+import Profile from './pages/Profile';
+import ChangePassword from './pages/ChangePassword';
+import Admin from './pages/Admin';
+import CreateExam from './pages/Admin/ManageExams/CreateExam';
+import ManageUsers from './pages/Admin/ManageUsers';
+import ManageExams from './pages/Admin/ManageExams';
+import ManageFeedback from './pages/Admin/ManageFeedback';
+import DefaultLayout from './layouts/DefaultLayout';
+import Dashboard from './pages/Admin/Dashboard';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+
+const PrivateRoute = ({ children }) => {
+	const { isAuthenticated } = useAuth();
+
+	return isAuthenticated ? children : <Navigate to='/' />;
+};
 
 const App = () => {
-  const [userCurrent, setUserCurrent] = useState(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (user) {
-      return user;
-    }
-
-    return null;
-  });
-
-  const handleChangeUserCurrent = (user) => {
-    localStorage.removeItem("user");
-    setUserCurrent(user);
-  };
-
-  const valueContext = {
-    userCurrent,
-    onChangeUserCurrent: handleChangeUserCurrent,
-  };
-
-  return (
-    <AuthContext.Provider value={valueContext}>
-      <Routes>
-        <Route path="/" element={<DefaultLayout />}>
-          <Route path="" element={<Home />} />
-          <Route path="list-exams" element={<ListExams />} />
-          <Route path="list-exams/:id" element={<DetailExam />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="transcript" element={<Transcript />} />
-          <Route path="profile/:id" element={<Profile />} />
-          <Route path="change-password" element={<ChangePassword />} />
-		  <Route path="change-info" element={<ChangeInfo/>} />
-        </Route>
-        <Route path="/admin" element={<Admin />}>
-          <Route path="" element={<Dashboard />} />
-          <Route path="exams" element={<ManageExams />} />
-          <Route path="exams/create" element={<CreateExam />} />
-          <Route path="exams/edit/:id" element={<CreateExam />} />
-          <Route path="users" element={<ManageUsers />} />
-          <Route path="feedback" element={<ManageFeedback />} />
-        </Route>
-		
-		<Route path="*" element={<h1>Not Found</h1>} />
-
-      </Routes>
-    </AuthContext.Provider>
-  );
+	return (
+		<div>
+			<AuthProvider>
+				<Routes>
+					<Route path='/' element={<DefaultLayout />}>
+						<Route path='' element={<Home />} />
+						<Route path='list-exams' element={<ListExams />} />
+						<Route path='contact' element={<Contact />} />
+						<Route path='detail/:idExam' element={<DetailExam />} />
+						<Route
+							path='transcript'
+							element={
+								<PrivateRoute>
+									<Transcript />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='profile'
+							element={
+								<PrivateRoute>
+									<Profile />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='change-password'
+							element={
+								<PrivateRoute>
+									<ChangePassword />
+								</PrivateRoute>
+							}
+						/>
+					</Route>
+					<Route path='/admin' element={<Admin />}>
+						<Route index element={<Dashboard />} />
+						<Route path='exams' element={<ManageExams />} />
+						<Route path='exams/create' element={<CreateExam />} />
+						<Route path='exams/update/:idExam' element={<CreateExam />} />
+						<Route path='users' element={<ManageUsers />} />
+						<Route path='feedback' element={<ManageFeedback />} />
+					</Route>
+				</Routes>
+			</AuthProvider>
+		</div>
+	);
 };
 
 export default App;

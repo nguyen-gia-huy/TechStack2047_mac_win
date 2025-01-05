@@ -1,7 +1,59 @@
-import { Button, Card, Divider, Form, Input } from 'antd';
+import {
+	ClockCircleOutlined,
+	QuestionCircleOutlined,
+	SearchOutlined,
+	StarOutlined,
+	StockOutlined,
+} from '@ant-design/icons';
+import {
+	Avatar,
+	Button,
+	Card,
+	Divider,
+	Form,
+	Input,
+	List,
+	Select,
+	Skeleton,
+} from 'antd';
 import React from 'react';
 
 const Contact = () => {
+	const listExam = [
+		{
+			title: 'Đề thi 1',
+			time: '45',
+			questions: [
+				{
+					question: 'Câu hỏi 1',
+					answer: {
+						A: 'Đáp án A',
+						B: 'Đáp án B',
+						C: 'Đáp án C',
+						D: 'Đáp án D',
+					},
+					answer_correct: [1],
+				},
+			],
+		},
+		{
+			title: 'Đề thi 1',
+			time: '45',
+			questions: [
+				{
+					question: 'Câu hỏi 1',
+					answer: {
+						A: 'Đáp án A',
+						B: 'Đáp án B',
+						C: 'Đáp án C',
+						D: 'Đáp án D',
+					},
+					answer_correct: [1],
+				},
+			],
+		},
+	];
+
 	return (
 		<>
 			<div

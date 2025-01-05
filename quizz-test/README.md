@@ -1,51 +1,75 @@
-```jsx
--route:
-	route cho user
-		Chung
-			+Trang chủ /pages/Home => route: '/'
-			+Danh sách đề thi /pages/ListExams => route: '/list-exams'
-			+Liên hệ /pages/Contact => route: '/contact'
-			+Trang chi tiết đề thi /pages/DetailExam => route: '/exams/:slug'
-            VD: Ten de thi: De thi ReactJS => '/list-exams/de-thi-reactjs'
-			+Not found /pages/NotFound
-		Chưa đăng nhập
-			+Đăng nhập /layouts/Navigation/index.js => FormLogin
-			+Đăng ký /layouts/Navigation/index.js => FormRegister
-		Đã đăng nhập
-			+Bảng điểm /pages/Transcript => route: '/transcript'
-			+Trang cá nhân /pages/Profile => route: '/profile'
-			+Đổi mật khẩu /pages/ChangePassword => route: '/change_password'
-	route cho admin
-        Dashboard /pages/Admin/Dashboard => route: '/admin'
-		Đề thi
-			+Quản lý đề thi /pages/Admin/ManageExams => route: '/admin/exams'
-			+Tạo đề thi /pages/Admin/ManageExams/CreateExam => route: '/admin/exams/create'
-		Người dùng
-			+Quản lý người dùng /pages/Admin/ManageUsers => route: '/admin/users'
-		Feedback
-			+Quản lý feedback /pages/Admin/ManageFeedback => route: '/admin/feedback'
+# note:
+To run this project:
+first command: json-server --watch database/db.json --port 8080
+second command: npm start  
 
+# Getting Started with Create React App
 
--features:
-	+Đăng nhập/ Đăng ký
-	+Phân quyền
-	+Danh sách đề thi (user)
-	+Lọc đề thi/Tìm kiếm đề thi
-	+Quản lý đề thi (admin)
-	+Quản lý user
-	+Đổi mật khẩu
-	+Chi tiết user(trang cá nhân)
-	+Thi thử
-	+Bảng điểm
-	+Liên hệ (user gửi email feedback cho admin)
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
----Phân quyền user và admin, user không vào được trang quản trị
--Bảng xếp hạng (vd: đề thi được thi nhiều nhất, môn học nhiều đề thi nhất..)
--Bình luận đề thi
--Hoàn thiện các chức năng còn thiếu trong trang quản trị
--Đăng nhập bằng tài khoản google, facebook
--Tìm kiếm đề thi
--Tạo môn thi (trang quản trị)
--Hoàn thiện phần thay đổi mật khẩu, chỉnh sửa thông tin cá nhân
--Hoàn thiện chức năng feedback, gửi mail
-```
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
+
+### `npm test`
+
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

@@ -1,7 +1,28 @@
-import { Table } from 'antd';
-import React from 'react';
+import {
+	ClockCircleOutlined,
+	QuestionCircleOutlined,
+	SearchOutlined,
+	StarOutlined,
+	StockOutlined,
+} from '@ant-design/icons';
+import {
+	Avatar,
+	Button,
+	Card,
+	Divider,
+	Input,
+	List,
+	Select,
+	Skeleton,
+	Space,
+	Table,
+	Tag,
+} from 'antd';
+import React, { useEffect, useState } from 'react';
 
 const Transcript = () => {
+	const [records, setRecords] = useState([]);
+
 	const titleSubject = {
 		html: 'HTML',
 		css: 'CSS',
@@ -20,7 +41,7 @@ const Transcript = () => {
 			title: 'Môn thi',
 			dataIndex: 'subject',
 			key: 'subject',
-			render: (value) => <div>{titleSubject[value]}</div>,
+			render: (value) => <div>{titleSubject[value]}</div>
 		},
 		{
 			title: 'Tên đề thi',
@@ -41,29 +62,41 @@ const Transcript = () => {
 			key: 'score',
 		},
 	];
-	const data = [
-		{
-			key: '1',
-			name: 'John Brown',
-			age: 32,
-			address: 'New York No. 1 Lake Park',
-			tags: ['nice', 'developer'],
-		},
-		{
-			key: '2',
-			name: 'Jim Green',
-			age: 42,
-			address: 'London No. 1 Lake Park',
-			tags: ['loser'],
-		},
-		{
-			key: '3',
-			name: 'Joe Black',
-			age: 32,
-			address: 'Sydney No. 1 Lake Park',
-			tags: ['cool', 'teacher'],
-		},
-	];
+	// const data = [
+	// 	{
+	// 		key: '1',
+	// 		name: 'John Brown',
+	// 		age: 32,
+	// 		address: 'New York No. 1 Lake Park',
+	// 		tags: ['nice', 'developer'],
+	// 	},
+	// 	{
+	// 		key: '2',
+	// 		name: 'Jim Green',
+	// 		age: 42,
+	// 		address: 'London No. 1 Lake Park',
+	// 		tags: ['loser'],
+	// 	},
+	// 	{
+	// 		key: '3',
+	// 		name: 'Joe Black',
+	// 		age: 32,
+	// 		address: 'Sydney No. 1 Lake Park',
+	// 		tags: ['cool', 'teacher'],
+	// 	},
+	// ];
+
+	const getHistories = async (subject) => {
+		// Có thể sử dụng thử viện axios
+		const response = await fetch(`http://localhost:8080/histories`);
+		const histories = await response.json();
+
+		setRecords(histories);
+	};
+
+	useEffect(() => {
+		getHistories();
+	}, []);
 
 	return (
 		<>
@@ -77,7 +110,7 @@ const Transcript = () => {
 				<h1>Bảng điểm cá nhân</h1>
 			</div>
 			<div style={{ marginTop: '32px' }}>
-				<Table columns={columns} dataSource={data} />
+				<Table columns={columns} dataSource={records} />
 			</div>
 		</>
 	);

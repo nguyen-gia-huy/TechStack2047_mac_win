@@ -1,32 +1,30 @@
+import React from 'react';
 import {
 	DashboardOutlined,
 	FileTextOutlined,
+	LaptopOutlined,
 	LoginOutlined,
 	MailOutlined,
+	NotificationOutlined,
 	UserOutlined,
 } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import './styles.css';
+import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { useNavigate } from 'react-router-dom';
 const { Content, Sider } = Layout;
 
 const DefaultLayoutAdmin = (props) => {
+	const navigate = useNavigate();
+
 	const {
 		token: { colorBgContainer, borderRadiusLG },
 	} = theme.useToken();
-
-	const navigate = useNavigate();
-
-	const handleRedirectPage = (url) => {
-		navigate(url);
-	};
 
 	const listNav = [
 		{
 			key: '',
 			icon: <DashboardOutlined />,
-			label: <div onClick={() => handleRedirectPage('/admin')}>Trang chủ</div>,
+			label: 'Trang chủ',
 		},
 		{
 			key: 'mange-exams',
@@ -35,19 +33,11 @@ const DefaultLayoutAdmin = (props) => {
 			children: [
 				{
 					key: 'exams',
-					label: (
-						<div onClick={() => handleRedirectPage('/admin/exams')}>
-							Danh sách đề thi
-						</div>
-					),
+					label: 'Danh sách đề thi',
 				},
 				{
 					key: 'exams/create',
-					label: (
-						<div onClick={() => handleRedirectPage('/admin/exams/create')}>
-							Tạo đề thi
-						</div>
-					),
+					label: 'Tạo đề thi',
 				},
 			],
 		},
@@ -80,6 +70,15 @@ const DefaultLayoutAdmin = (props) => {
 		},
 	];
 
+	const handleRedirectPage = (menu) => {
+		console.log('menu: ', menu);
+		if (menu.key === 'logout') {
+			navigate('/');
+			return;
+		}
+		navigate(`./${menu.key}`);
+	};
+
 	return (
 		<div className='nav-admin'>
 			<Layout>
@@ -98,6 +97,7 @@ const DefaultLayoutAdmin = (props) => {
 								height: '100%',
 								borderRight: 0,
 							}}
+							onClick={handleRedirectPage}
 							items={listNav}
 						/>
 					</Sider>

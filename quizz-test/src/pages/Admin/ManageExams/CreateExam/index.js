@@ -11,154 +11,127 @@ import {
 	Select,
 	Space,
 } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './styles.css';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import {
-	useCreateExam,
-	useGetExam,
-	useUpdateExam,
-} from '../../../../apis/exams';
-import { useParams } from 'react-router-dom';
 
 const CreateExam = () => {
-	const params = useParams();
-	const idExam = params.id;
-
 	const [api, contextHolder] = notification.useNotification();
 
-	const [statePage, setStatePage] = useState('create');
+	const [isLoading, setIsLoading] = useState(false);
+	const [title, setTitle] = useState(null);
+	const [time, setTime] = useState(null);
+	const [subject, setSubject] = useState('html');
+	const [level, setLevel] = useState('basic');
 	const [questions, setQuestions] = useState([
 		{
-			question: '',
-			answers: ['', '', '', ''],
-			answerCorrect: -1,
+			question: null,
+			answers: [],
+			answer_correct: null,
 		},
 	]);
 
-	const validationSchema = Yup.object({
-		name: Yup.string().required('Tên đề thi không được bỏ trống'),
-		time: Yup.number()
-			.required('Thời gian làm bài là bắt buộc')
-			.min(1, 'Thời gian phải lớn hơn 0'),
-		subject: Yup.string().required('Môn học không được bỏ trống'),
-		level: Yup.number()
-			.required('Cấp độ là bắt buộc')
-			.oneOf([1, 2, 3], 'Cấp độ phải là Cơ bản hoặc Trung bình hoặc Nâng cao'),
-	});
+	const handleChangeTitle = (event) => {
+		setTitle(event.target.value);
+	};
 
-	const formik = useFormik({
-		initialValues: {
-			name: '',
-			time: 0,
-			subject: '',
-			level: 1,
-			highestScore: 0,
-		},
-		// validationSchema,
-		onSubmit: (data) => {
-			const newExam = { ...data, questions };
+	const handleChangeTime = (event) => {
+		setTime(event.target.value);
+	};
 
-			if (statePage === 'create') {
-				createExam(newExam);
-			} else {
-				updateExam(newExam);
-			}
-		},
-	});
+	const handleChangeSubject = (value) => {
+		setSubject(value);
+	};
 
-	const { data } = useGetExam(idExam);
-
-	const { mutate: createExam, isPending } = useCreateExam({
-		callbackSuccess: (data) => {
-			api.success({
-				message: 'Tạo đề thi thành công',
-				placement: 'topRight',
-			});
-			setQuestions([
-				{
-					question: '',
-					answers: ['', '', '', ''],
-					answerCorrect: -1,
-				},
-			]);
-
-			formik.handleReset();
-		},
-		callbackError: (error) => {
-			api.error({
-				message: 'Tạo đề thi thất bại',
-				description: error,
-				placement: 'topRight',
-			});
-		},
-	});
-
-	const { mutate: updateExam } = useUpdateExam({
-		callbackSuccess: (data) => {
-			api.success({
-				message: 'Sửa đề thi thành công',
-				placement: 'topRight',
-			});
-		},
-		callbackError: (error) => {
-			api.error({
-				message: 'Sửa đề thi thất bại',
-				description: error,
-				placement: 'topRight',
-			});
-		},
-	});
+	const handleChangeLevel = (value) => {
+		setLevel(value);
+	};
 
 	const handleAddQuestion = () => {
-		setQuestions([
-			...questions,
-			{
-				question: '',
-				answers: ['', '', '', ''],
-				answerCorrect: -1,
-			},
-		]);
+		const newQuestion = {
+			question: null,
+			answers: [],
+			answer_correct: null,
+		};
+
+		setQuestions([...questions, newQuestion]);
 	};
 
-	const handleChangeContentQuestion = (value, index, key, indexAnswer = -1) => {
-		const newQuestions = [...questions];
-		if (indexAnswer !== -1) {
-			newQuestions[index][key][indexAnswer] = value;
+	// Hàm xử lý nội dung câu hỏi
+	const handleChangeQuestion = (event, index) => {
+		const questionsTemp = [...questions];
+		questionsTemp[index].question = event.target.value;
+
+		setQuestions(questionsTemp);
+	};
+
+	// Hàm xử lý đáp án
+	const handleChangeAnswer = (event, index, indexAswer) => {
+		const questionsTemp = [...questions];
+		questionsTemp[index].answers[indexAswer] = event.target.value;
+
+		setQuestions(questionsTemp);
+	};
+
+	// Hàm chọn đáp án đúng
+	const handleChangeAnswerCorrect = (event, index) => {
+		const questionsTemp = [...questions];
+		questionsTemp[index].answer_correct = event.target.value;
+
+		setQuestions(questionsTemp);
+	};
+
+	// Hàm tạo đề thi
+	const handleCreateExam = async () => {
+		setIsLoading(true);
+		const newExams = {
+			title,
+			time,
+			subject,
+			level,
+			questions,
+			highest_point: null,
+		};
+
+		try {
+			const response = await fetch('http://localhost:8080/exams', {
+				method: 'POST',
+				body: JSON.stringify(newExams),
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+
+			api.success({
+				message: 'Tạo đề thi thành công',
+			});
+
+			setTitle(null);
+			setTime(null);
+			setSubject('html');
+			setLevel('basic');
+			setQuestions([
+				{
+					question: null,
+					answers: [],
+					answer_correct: null,
+				},
+			]);
+		} catch (e) {
+			api.error({
+				message: 'Tạo đề thi không thành công',
+			});
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
+	const checkStatusDisabledButtonCreate = () => {
+		if (!title || !time || !subject || !level || questions.length < 2) {
+			return true;
 		} else {
-			newQuestions[index][key] = value;
+			return false;
 		}
-
-		setQuestions(newQuestions);
 	};
-
-	useEffect(() => {
-		if (idExam) {
-			setStatePage('edit');
-		}
-	}, [idExam]);
-
-	useEffect(() => {
-		if (data?.questions.length > 0) {
-			setQuestions(data.questions);
-		}
-		if (data?.name) {
-			formik.setFieldValue('name', data.name);
-		}
-		if (data?.time) {
-			formik.setFieldValue('time', data.time);
-		}
-		if (data?.subject) {
-			formik.setFieldValue('subject', data.subject);
-		}
-		if (data?.level) {
-			formik.setFieldValue('level', data.level);
-		}
-		if (data?.level) {
-			formik.setFieldValue('id', data.id);
-		}
-	}, [data]);
 
 	return (
 		<div className='create-exam'>
@@ -169,7 +142,7 @@ const CreateExam = () => {
 					justifyContent: 'space-between',
 				}}
 			>
-				<h1>{statePage === 'create' ? 'Tạo' : 'Sửa'} đề thi</h1>
+				<h1>Tạo đề thi</h1>
 			</div>
 
 			<Form name='basic' layout='vertical'>
@@ -183,9 +156,8 @@ const CreateExam = () => {
 								<Form.Item label='Tên đề thi'>
 									<Input
 										size='large'
-										name='name'
-										value={formik.values.name}
-										onChange={formik.handleChange}
+										value={title}
+										onChange={handleChangeTitle}
 									/>
 								</Form.Item>
 							</Col>
@@ -196,9 +168,8 @@ const CreateExam = () => {
 										suffix='phút'
 										type='number'
 										size='large'
-										name='time'
-										value={formik.values.time}
-										onChange={formik.handleChange}
+										value={time}
+										onChange={handleChangeTime}
 									/>
 								</Form.Item>
 							</Col>
@@ -206,9 +177,8 @@ const CreateExam = () => {
 								<Form.Item label='Môn thi'>
 									<Select
 										size='large'
-										name='subject'
-										value={formik.values.subject}
-										onChange={(value) => formik.setFieldValue('subject', value)}
+										value={subject}
+										onChange={handleChangeSubject}
 										options={[
 											{
 												value: 'html',
@@ -238,20 +208,19 @@ const CreateExam = () => {
 								<Form.Item label='Mức độ'>
 									<Select
 										size='large'
-										name='level'
-										value={formik.values.level}
-										onChange={(value) => formik.setFieldValue('level', value)}
+										value={level}
+										onChange={handleChangeLevel}
 										options={[
 											{
-												value: 1,
+												value: 'basic',
 												label: 'Cơ bản',
 											},
 											{
-												value: 2,
+												value: 'medium',
 												label: 'Trung bình',
 											},
 											{
-												value: 3,
+												value: 'advanced',
 												label: 'Nâng cao',
 											},
 										]}
@@ -264,40 +233,28 @@ const CreateExam = () => {
 						<div>
 							<Divider orientation='left'>Số lượng câu hỏi</Divider>
 						</div>
-						{questions?.map((question, index) => (
-							<Row justify='space-between'>
-								<Col span={24} style={{ padding: '0px 12px' }}>
+						<Row justify='space-between'>
+							<Col span={24} style={{ padding: '0px 12px' }}>
+								{questions.map((question, index) => (
 									<div
 										style={{
 											display: 'flex',
 											flexDirection: 'column',
-											marginTop: '0px',
+											marginTop: index === 0 ? '0px' : '20px',
 										}}
 									>
 										<Form.Item label={`Câu hỏi ${index + 1}`}>
 											<Input.TextArea
-												value={question?.question}
-												onChange={(event) =>
-													handleChangeContentQuestion(
-														event.target.value,
-														index,
-														'question'
-													)
-												}
+												onChange={(event) => handleChangeQuestion(event, index)}
 											/>
 										</Form.Item>
 										<Radio.Group
-											value={Number(question?.answerCorrect)}
-											onChange={(event) => {
-												handleChangeContentQuestion(
-													event.target.value,
-													index,
-													'answerCorrect'
-												);
-											}}
+											onChange={(event) =>
+												handleChangeAnswerCorrect(event, index)
+											}
 										>
 											<Space direction='vertical' style={{ width: '100%' }}>
-												<Radio value={0}>
+												<Radio value='A'>
 													<div
 														style={{
 															display: 'flex',
@@ -308,19 +265,13 @@ const CreateExam = () => {
 															Đáp án A
 														</div>
 														<Input
-															value={question?.answers[0]}
 															onChange={(event) =>
-																handleChangeContentQuestion(
-																	event.target.value,
-																	index,
-																	'answers',
-																	0
-																)
+																handleChangeAnswer(event, index, 0)
 															}
 														/>
 													</div>
 												</Radio>
-												<Radio value={1}>
+												<Radio value='B'>
 													<div
 														style={{
 															display: 'flex',
@@ -331,19 +282,13 @@ const CreateExam = () => {
 															Đáp án B
 														</div>
 														<Input
-															value={question?.answers[1]}
 															onChange={(event) =>
-																handleChangeContentQuestion(
-																	event.target.value,
-																	index,
-																	'answers',
-																	1
-																)
+																handleChangeAnswer(event, index, 1)
 															}
 														/>
 													</div>
 												</Radio>
-												<Radio value={2}>
+												<Radio value='C'>
 													<div
 														style={{
 															display: 'flex',
@@ -354,19 +299,13 @@ const CreateExam = () => {
 															Đáp án C
 														</div>
 														<Input
-															value={question?.answers[2]}
 															onChange={(event) =>
-																handleChangeContentQuestion(
-																	event.target.value,
-																	index,
-																	'answers',
-																	2
-																)
+																handleChangeAnswer(event, index, 2)
 															}
 														/>
 													</div>
 												</Radio>
-												<Radio value={3}>
+												<Radio value='D'>
 													<div
 														style={{
 															display: 'flex',
@@ -377,14 +316,8 @@ const CreateExam = () => {
 															Đáp án D
 														</div>
 														<Input
-															value={question?.answers[3]}
 															onChange={(event) =>
-																handleChangeContentQuestion(
-																	event.target.value,
-																	index,
-																	'answers',
-																	3
-																)
+																handleChangeAnswer(event, index, 3)
 															}
 														/>
 													</div>
@@ -392,16 +325,17 @@ const CreateExam = () => {
 											</Space>
 										</Radio.Group>
 									</div>
-								</Col>
-							</Row>
-						))}
-						<Button
-							onClick={handleAddQuestion}
-							fullWidth
-							style={{ marginTop: '12px' }}
-						>
-							Thêm mới câu hỏi
-						</Button>
+								))}
+
+								<Button
+									fullWidth
+									style={{ marginTop: '12px' }}
+									onClick={handleAddQuestion}
+								>
+									Thêm mới câu hỏi
+								</Button>
+							</Col>
+						</Row>
 					</Col>
 				</Row>
 
@@ -418,10 +352,11 @@ const CreateExam = () => {
 					<Button
 						type='primary'
 						style={{ marginRight: '12px' }}
-						onClick={formik.handleSubmit}
-						loading={isPending}
+						onClick={handleCreateExam}
+						loading={isLoading}
+						disabled={checkStatusDisabledButtonCreate()}
 					>
-						{statePage === 'create' ? 'Tạo' : 'Cập nhật'} đề thi
+						Tạo đề thi
 					</Button>
 				</div>
 			</Form>

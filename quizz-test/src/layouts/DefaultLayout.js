@@ -1,7 +1,8 @@
-import { Layout } from 'antd';
 import React from 'react';
-import { Outlet } from 'react-router-dom';
 import Navigation from './Navigation';
+import Sidebar from './DefaultLayoutAdmin';
+import { Outlet } from 'react-router-dom';
+import { Layout } from 'antd';
 
 const { Content } = Layout;
 
@@ -15,13 +16,15 @@ const layoutStyle = {
 	padding: '12px',
 };
 
-const DefaultLayout = ({ children }) => {
+const DefaultLayout = () => {
 	return (
 		<div>
 			<Navigation />
 			<Layout style={layoutStyle}>
 				<div className='body-page'>
-					<Content><Outlet /></Content>
+					<Content>
+						<Outlet />
+					</Content>
 				</div>
 			</Layout>
 		</div>
