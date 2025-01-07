@@ -23,6 +23,7 @@ const UserProfile = () => {
   const [newDateOfBirth, setNewDateOfBirth] = useState(null);
   const [newGender, setNewGender] = useState(""); // Thêm state để lưu giới tính
   const [newAddress, setNewAddress] = useState(""); // Thêm state để lưu giới tính
+  console.log("id", userId);
   // Sử dụng React Query để lấy dữ liệu người dùng
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["users", userId],
@@ -38,13 +39,13 @@ const UserProfile = () => {
   const handleChangeName = async () => {
     try {
       const { data: userData } = await axios.get(
-        ` http://localhost:3000/users/${userId}`
+        ` http://localhost:8080/users/${userId}`
       );
 
       const updatedUserName = { ...userData, username: newName };
 
       const response = await axios.put(
-        ` http://localhost:3000/users/${userId}`,
+        ` http://localhost:8080/users/${userId}`,
         updatedUserName
       );
 
@@ -62,13 +63,13 @@ const UserProfile = () => {
   const handleChangeEmail = async () => {
     try {
       const { data: userData } = await axios.get(
-        `http://localhost:3000/users/${userId}`
+        `http://localhost:8080/users/${userId}`
       );
 
       const updatedUserEmail = { ...userData, email: newEmail };
 
       const response = await axios.put(
-        `http://localhost:3000/users/${userId}`,
+        `http://localhost:8080/users/${userId}`,
         updatedUserEmail
       );
 
@@ -86,14 +87,14 @@ const UserProfile = () => {
   const handleChangeDateOfBirth = async () => {
     try {
       const { data: userData } = await axios.get(
-        ` http://localhost:3000/users/${userId}`
+        ` http://localhost:8080/users/${userId}`
       );
       const updatedUserDateOfBirth = {
         ...userData,
         dateOfBirth: newDateOfBirth.format("YYYY-MM-DD"), // Chuyển định dạng ngày
       };
       await axios.put(
-        `http://localhost:3000/users/${userId}`,
+        `http://localhost:8080/users/${userId}`,
         updatedUserDateOfBirth
       );
       message.success("Date of Birth changed successfully!");
@@ -107,14 +108,14 @@ const UserProfile = () => {
   const handleChangeGender = async () => {
     try {
       const { data: userData } = await axios.get(
-        ` http://localhost:3000/users/${userId}`
+        ` http://localhost:3000/8080/${userId}`
       );
       const updatedUserGender = {
         ...userData,
         gender: newGender,
       };
       await axios.put(
-        `http://localhost:3000/users/${userId}`,
+        `http://localhost:8080/users/${userId}`,
         updatedUserGender
       );
       message.success("Gender updated successfully!");
@@ -129,14 +130,14 @@ const UserProfile = () => {
   const handleChangeAddress = async () => {
     try {
       const { data: userData } = await axios.get(
-        `http://localhost:3000/users/${userId}`
+        `http://localhost:8080/users/${userId}`
       );
       const updatedUserAddress = {
         ...userData,
         address: newAddress,
       };
       await axios.put(
-        `http://localhost:3000/users/${userId}`,
+        `http://localhost:8080/users/${userId}`,
         updatedUserAddress
       );
       message.success("Address updated successfully!");

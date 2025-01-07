@@ -6,7 +6,9 @@
       "gender": "",
       "role": "admin",
       "id": "1",
-      "password": "12345678"
+      "password": "12345678",
+      "dateOfBirth": "2025-01-01",
+      "username": "nguyenhuy3112005@gmail.com"
     },
     {
       "id": "2",
@@ -197,6 +199,15 @@
       "title": "Đề thi HTML 1",
       "time_progess": 8,
       "score": 1
+    },
+    {
+      "id": "7fb2",
+      "idUser": "1",
+      "idExam": "6551",
+      "subject": "html",
+      "title": "Đề thi HTML 1",
+      "time_progess": 5,
+      "score": 2
     }
   ]
 }
