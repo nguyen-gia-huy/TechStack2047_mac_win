@@ -1,3 +1,4 @@
+
 import {
   Avatar,
   Button,
@@ -7,6 +8,7 @@ import {
   Input,
   Modal,
   notification,
+  message,
 } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
@@ -14,6 +16,8 @@ import * as Yup from "yup";
 import "./navigation.css";
 import { useFormik } from "formik";
 import { useAuth } from "../../contexts/AuthContext";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const FormLogin = ({ onRegister, formLogin }) => {
   return (
@@ -131,11 +135,29 @@ const Navigation = ({ user }) => {
   const [listUser, setListUser] = useState([]);
   const [api, contextHolder] = notification.useNotification();
   const { isAuthenticated, login, logout, userCurrent } = useAuth();
+  const userId = userCurrent?.id;
+  console.log("123", userId);
+  const fetchData = async () => {
+    const user = localStorage.getItem(userId);
+    const response = await fetch(`http://localhost:8080/users/${userId}`);
+    console.log(response)
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch profile data. Status: ${response.status}`
+      );
+    }
 
-  const userid = localStorage.getItem("userCurrent");
-  const userID2 = localStorage.getItem("isAuthenticated");
-  console.log(userID2);
-  console.log(userid);
+    return response.json();
+  };
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["users", userId],
+    queryFn: fetchData,
+    enabled: !!userId,
+    onError: (err) => {
+      console.error("Error fetching data:", err);
+      message.error(err.message);
+    },
+  });
   console.log(userCurrent?.id);
   const items = [
     {
@@ -377,7 +399,7 @@ const Navigation = ({ user }) => {
           </label>
 
           <div className="profile">
-            {isAuthenticated ? (
+            {isAuthenticated &&data  ? (
               <>
                 {/* Đã đăng nhập */}
                 <Dropdown menu={{ items }} placement="top">
@@ -385,8 +407,9 @@ const Navigation = ({ user }) => {
                     size="large"
                     style={{ width: "55px", height: "55px" }}
                   >
-                    {userCurrent.username}
+                    {data.username[0]}
                   </Avatar>
+                 
                 </Dropdown>
               </>
             ) : (

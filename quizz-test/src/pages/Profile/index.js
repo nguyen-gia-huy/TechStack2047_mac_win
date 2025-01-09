@@ -108,7 +108,7 @@ const UserProfile = () => {
   const handleChangeGender = async () => {
     try {
       const { data: userData } = await axios.get(
-        ` http://localhost:3000/8080/${userId}`
+        ` http://localhost:8080/users/${userId}`
       );
       const updatedUserGender = {
         ...userData,
